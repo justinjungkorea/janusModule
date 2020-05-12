@@ -1,0 +1,27 @@
+{
+  "name": "janusModule",
+  "version": "1.0.0",
+  "description": "It is a just test project for janus",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --delay 2s --exec babel-node index.js "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justinjungkorea/janusModule.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/justinjungkorea/janusModule/issues"
+  },
+  "homepage": "https://github.com/justinjungkorea/janusModule#readme",
+  "dependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "express": "^4.17.1",
+    "ws": "^7.2.0"
+  }
+}
