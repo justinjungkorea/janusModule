@@ -9,12 +9,12 @@ const PORT = 4545;
 app.set('views', path.join(__dirname,'/'));
 app.set('view engine', 'html');
 
-const options = {
-  key: fs.readFileSync('./ssl/ktgenie.key'),
-  cert: fs.readFileSync('./ssl/ktgenie_cert.pem'),
-  ca: fs.readFileSync('./ssl/RootCA.crt'),
-  passphrase: 'kpoint'
-}
+// const options = {
+//   key: fs.readFileSync('./ssl/ktgenie.key'),
+//   cert: fs.readFileSync('./ssl/ktgenie_cert.pem'),
+//   ca: fs.readFileSync('./ssl/RootCA.crt'),
+//   passphrase: 'kpoint'
+// }
 
 app.use(express.static('public'));
 
@@ -22,7 +22,7 @@ app.get('/', (req,res)=>{
     
 })
 
-// http.createServer(app).listen(PORT, ()=>{
-  https.createServer(options, app).listen(PORT, ()=>{
+http.createServer(app).listen(PORT, ()=>{
+  // https.createServer(options, app).listen(PORT, ()=>{
     console.log(`✅ Server running on http://localhost:${PORT}/views/home.html`);
 })
