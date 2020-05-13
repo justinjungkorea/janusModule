@@ -90,18 +90,18 @@ const getMessage = (message) => {
 						if(userId == 'a1'){
 							janus.destroyRoom(ws);
 						} else {
-							janus.joinVideoRoom(ws,35610863)
+							janus.joinVideoRoom(ws,76052757)
 						}
 						break;
 					case 'attachSubscriber':
 						let tempId = subscriberTransaction[messageObj.transaction];
 						subscriber_ids[tempId] = messageObj.data.id;
 						setTimeout(()=>{
-							janus.joinSubscriber(ws, 35610863, tempId, subscriberFeedId[tempId]);
+							janus.joinSubscriber(ws, 76052757, tempId, subscriberFeedId[tempId]);
 						}, 1000);
 						break;
 					case 'createVideoRoom':
-						janus.joinVideoRoom(ws,35610863)
+						janus.joinVideoRoom(ws,76052757)
 						break;
 					case 'joinVideoRoom':
 						break;
@@ -280,7 +280,7 @@ const createSDPAnswer = async data => {
 				session_id: session_id,
 				body: {
 				request: "start",
-				room: 35610863,
+				room: 76052757,
 				video: true,
 				audio: false
 				},
@@ -359,7 +359,7 @@ janus.createVideoRoom = (ws) => {
 		transaction: trxid,
 		body : {
 			request: 'create',
-			room: 35610863,
+			room: 76052757,
 			bitrate: 40000,
 			publishers: 100
 		}
@@ -498,7 +498,7 @@ janus.destroyRoom = (ws) => {
 		transaction: trxid,
 		body : {
 			request: 'destroy',
-			room: 35610863
+			room: 76052757
 		}
 	};
 
