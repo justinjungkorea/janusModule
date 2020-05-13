@@ -3,7 +3,8 @@ const userBtns = document.getElementsByClassName('userBtn');
 const videoFlag = document.getElementById("videoFlag");
 
 // var janusUrl = 'ws://106.240.247.43:8188';
-var janusUrl = 'ws://13.209.65.193:7011';
+var janusUrl = 'ws://106.240.247.43:3561';
+// var janusUrl = 'ws://13.209.65.193:7011';
 // var janusSecret = '19dc9bf617df828f1da469c843c93d327ac36bf1';
 var session_id;
 var publish_id;
@@ -511,5 +512,6 @@ for(i=0;i<userBtns.length;++i){
     userBtns[i].addEventListener('click', () => {
 		userId = temp;
 		janus.createSession(ws);
+		document.getElementById('user').style.display = 'none'
     })
 }
