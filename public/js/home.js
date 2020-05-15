@@ -1,6 +1,7 @@
 const printBox = document.getElementById('printBox');
 const userBtns = document.getElementsByClassName('userBtn');
 const videoFlag = document.getElementById("videoFlag");
+const videoBox = document.getElementById("videoBox");
 
 // var janusUrl = 'ws://106.240.247.43:8188';
 var janusUrl = 'ws://106.240.247.43:3561';
@@ -18,6 +19,26 @@ let janusStreams = {};
 let janusStreamPeers = {};
 let feedId;
 let userId;
+
+let two = [1280, 720, 1382000];
+let four = [960, 540, 518000];
+let nine = [640, 360, 230000];
+let sixteen = [480, 270, 129000];
+let twentyfive = [240, 135, 64000];
+
+let mediaConstraint = {
+    video: {
+        width:{min: twentyfive[0], ideal: twentyfive[0]}, 
+        height:{min: twentyfive[1], ideal: twentyfive[1]}
+    }, 
+    audio: true, 
+    frameRate: { 
+        ideal: 10, 
+        max: 10 
+    } 
+};
+
+let bitrate = twentyfive[2];
 
 var ws = new WebSocket(janusUrl, 'janus-protocol');
 
@@ -199,17 +220,7 @@ const createVideoBox = userId => {
 }
 
 const createSDPOffer = async userId => {
-	janusStreams[userId] = await navigator.mediaDevices.getUserMedia({
-        video: {
-            width:{min: 240, ideal: 240}, 
-            height:{min: 135, ideal: 135}
-        }, 
-        audio: true, 
-        frameRate: { 
-            ideal: 10, 
-            max: 10 
-        } 
-    });
+	janusStreams[userId] = await navigator.mediaDevices.getUserMedia(mediaConstraint);
 	
 	if(videoFlag.checked){
 		let str = 'multiVideo-'+userId;
@@ -360,7 +371,7 @@ janus.createVideoRoom = (ws) => {
 		body : {
 			request: 'create',
 			room: 35610863,
-			bitrate: 40000,
+			bitrate,
 			publishers: 100
 		}
 	};

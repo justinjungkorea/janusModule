@@ -26,8 +26,11 @@
             float: left;
             padding: 5px 5px;
         }
-        #videoBox {display: flex; justify-content: flex-start;}
-        #videoBox video {width: 100px; }
+        #videoBox {
+            display: grid;
+            grid-template-columns: auto auto auto;
+        }
+        /* #videoBox video {width: 100px; } */
         .multi-video {
             border: 1px solid black;
             margin: 2px;
