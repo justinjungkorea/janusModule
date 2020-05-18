@@ -140,8 +140,6 @@ const getMessage = (message) => {
 			{
 				if(messageObj.plugindata.data.videoroom == 'joined'){
 					feedId = messageObj.plugindata.data.id;
-					createVideoBox(userId);
-					createSDPOffer(userId);
 					let publishers = messageObj.plugindata.data.publishers;
 					publishers.forEach(element => {
 						subscriberFeedId[element.display] = element.id;
@@ -150,6 +148,10 @@ const getMessage = (message) => {
 						// createVideoBox(element.display);
 						// createSDPAnswer(element.display);
 					})
+					setTimeout(()=>{
+						createVideoBox(userId);
+						createSDPOffer(userId);
+					},1500)
 				}
 				if(messageObj.plugindata.data.configured == 'ok'){
 					if(messageObj.jsep)
