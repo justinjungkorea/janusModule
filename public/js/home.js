@@ -142,15 +142,19 @@ const getMessage = (message) => {
 				if(messageObj.plugindata.data.videoroom == 'joined'){
 					feedId = messageObj.plugindata.data.id;
 					let publishers = messageObj.plugindata.data.publishers;
-					if(subscribeFlag.checked){
-						publishers.forEach(element => {
-							subscriberFeedId[element.display] = element.id;
-							feedIdToId[element.id] = element.display;
+					
+					publishers.forEach(element => {
+						subscriberFeedId[element.display] = element.id;
+						feedIdToId[element.id] = element.display;
+						if(subscribeFlag.checked){
 							janus.attachPlugin(ws,element.display,session_id,'janus.plugin.videoroom', false);
-							// createVideoBox(element.display);
-							// createSDPAnswer(element.display);
-						})
-					}
+						} else {
+							plusOne2(element.id);
+						}
+						// createVideoBox(element.display);
+						// createSDPAnswer(element.display);
+						
+					})
 					setTimeout(()=>{
 						createVideoBox(userId);
 						createSDPOffer(userId);
@@ -176,7 +180,8 @@ const getMessage = (message) => {
 					if(subscribeFlag.checked){
 						janus.attachPlugin(ws, messageObj.plugindata.data.publishers[0].display, session_id, 'janus.plugin.videoroom', false );
 					} else {
-						plusOne(messageObj.plugindata.data.publishers[0].id);
+						plusOne2(messageObj.plugindata.data.publishers[0].id);
+						console.log(`${messageObj.plugindata.data.publishers[0].id} joined, total : ${Object.keys(people).length}`)
 					}
 				}
 				
@@ -267,6 +272,87 @@ const plusOne = (id) => {
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(25%, auto))";
 		changeConfig();
 	} else if (nop == 17) {
+		mediaConstraint = {
+			video: {
+				width:{min: twentyfive[0], ideal: twentyfive[0]}, 
+				height:{min: twentyfive[1], ideal: twentyfive[1]}
+			}, 
+			audio: true, 
+			frameRate: { 
+				ideal: 10, 
+				max: 10 
+			} 
+		}
+		bitrate = twentyfive[2];
+		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(20%, auto))";
+		changeConfig();
+	} 
+}
+
+const plusOne2 = (id) => {
+	people[id] = true;
+	let nop = Object.keys(people).length;
+	if(nop <= 2){
+		mediaConstraint = {
+			video: {
+				width:{min: two[0], ideal: two[0]}, 
+				height:{min: two[1], ideal: two[1]}
+			}, 
+			audio: true, 
+			frameRate: { 
+				ideal: 15, 
+				max: 15
+			} 
+		};
+		bitrate = two[2];
+		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
+		changeConfig();
+	} else if(nop <= 4){
+		mediaConstraint = {
+			video: {
+				width:{min: four[0], ideal: four[0]}, 
+				height:{min: four[1], ideal: four[1]}
+			}, 
+			audio: true, 
+			frameRate: { 
+				ideal: 10, 
+				max: 10 
+			} 
+		};
+		bitrate = four[2];
+		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
+		changeConfig();
+	} else if (nop <= 9) {
+		mediaConstraint = {
+			video: {
+				width:{min: nine[0], ideal: nine[0]}, 
+				height:{min: nine[1], ideal: nine[1]}
+			}, 
+			audio: true, 
+			frameRate: { 
+				ideal: 10, 
+				max: 10 
+			} 
+		}
+		bitrate = nine[2];
+		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(30%, auto))";
+		changeConfig();
+	} else if (nop <= 16) {
+		mediaConstraint = {
+			video: {
+				width:{min: sixteen[0], ideal: sixteen[0]}, 
+				height:{min: sixteen[1], ideal: sixteen[1]}
+			}, 
+			audio: true, 
+			frameRate: { 
+				ideal: 10, 
+				max: 10 
+			} 
+		};
+		bitrate = sixteen[2];
+		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(25%, auto))";
+		changeConfig();
+	} else if (nop <= 25) {
 		mediaConstraint = {
 			video: {
 				width:{min: twentyfive[0], ideal: twentyfive[0]}, 
