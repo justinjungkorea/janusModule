@@ -201,7 +201,7 @@ const getMessage = (message) => {
 const plusOne = (id) => {
 	people[id] = true;
 	let nop = Object.keys(people).length;
-	if(nop == 2){
+	if(nop == 3){
 		mediaConstraint = {
 			video: {
 				width:{min: four[0], ideal: four[0]}, 
@@ -216,7 +216,7 @@ const plusOne = (id) => {
 		bitrate = four[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
 		changeConfig();
-	} else if (nop == 3) {
+	} else if (nop == 5) {
 		mediaConstraint = {
 			video: {
 				width:{min: nine[0], ideal: nine[0]}, 
@@ -231,7 +231,7 @@ const plusOne = (id) => {
 		bitrate = nine[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(30%, auto))";
 		changeConfig();
-	} else if (nop == 4) {
+	} else if (nop == 10) {
 		mediaConstraint = {
 			video: {
 				width:{min: sixteen[0], ideal: sixteen[0]}, 
@@ -246,7 +246,7 @@ const plusOne = (id) => {
 		bitrate = sixteen[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(25%, auto))";
 		changeConfig();
-	} else if (nop == 5) {
+	} else if (nop == 17) {
 		mediaConstraint = {
 			video: {
 				width:{min: twentyfive[0], ideal: twentyfive[0]}, 
