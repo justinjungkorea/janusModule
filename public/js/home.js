@@ -2,6 +2,7 @@ const printBox = document.getElementById('printBox');
 const userBtns = document.getElementsByClassName('userBtn');
 const videoFlag = document.getElementById("videoFlag");
 const videoBox = document.getElementById("videoBox");
+const changeConfig = document.getElementById("changeConfig");
 
 // var janusUrl = 'ws://106.240.247.43:8188';
 var janusUrl = 'ws://106.240.247.43:3561';
@@ -19,6 +20,7 @@ let janusStreams = {};
 let janusStreamPeers = {};
 let feedId;
 let userId;
+let people = {};
 
 let two = [1280, 720, 1382000];
 let four = [960, 540, 518000];
@@ -28,8 +30,8 @@ let twentyfive = [240, 135, 64000];
 
 let mediaConstraint = {
     video: {
-        width:{min: twentyfive[0], ideal: twentyfive[0]}, 
-        height:{min: twentyfive[1], ideal: twentyfive[1]}
+        width:{min: two[0], ideal: two[0]}, 
+        height:{min: two[1], ideal: two[1]}
     }, 
     audio: true, 
     frameRate: { 
@@ -38,7 +40,7 @@ let mediaConstraint = {
     } 
 };
 
-let bitrate = twentyfive[2];
+let bitrate = two[2];
 
 var ws = new WebSocket(janusUrl, 'janus-protocol');
 
@@ -181,6 +183,8 @@ const getMessage = (message) => {
 					janusStreamPeers[tempId].close();
 					janusStreamPeers[tempId] = null;
 					delete janusStreamPeers[tempId];
+
+					delete people[tempId];
 				}
 				
 			}
@@ -216,7 +220,9 @@ const createVideoBox = userId => {
     multiVideo.id = "multiVideo-" + userId;
     videoContainner.appendChild(multiVideo);
 
-    videoBox.appendChild(videoContainner);
+	videoBox.appendChild(videoContainner);
+	
+	people[userId] = true;
 }
 
 const createSDPOffer = async userId => {
@@ -517,6 +523,24 @@ janus.destroyRoom = (ws) => {
 	ws.send(JSON.stringify(msg));
 }
 
+janus.editRoom = (ws, bit) => {
+	let trxid = getTrxID();
+	let msg = {
+		janus: 'message',
+		session_id: session_id,
+		handle_id: publish_id,
+		transaction: trxid,
+		body : {
+			request: 'edit',
+			room: 35610863,
+			new_bitrate: bit
+		}
+	};
+
+	socketLog('send', msg);
+	ws.send(JSON.stringify(msg));
+}
+
 ///////// 버튼 이벤트 관련 method /////////
 for(i=0;i<userBtns.length;++i){
     const temp = userBtns[i].value;
@@ -526,3 +550,19 @@ for(i=0;i<userBtns.length;++i){
 		document.getElementById('user').style.display = 'none'
     })
 }
+
+changeConfig.addEventListener('click', async () => {
+	
+	janusStreams[userId].getVideoTracks()[0].stop();
+	janusStreams[userId].getAudioTracks()[0].stop();
+	
+	janusStreams[userId] = await navigator.mediaDevices.getDisplayMedia({video:true});;
+	// let multiVideo = document.getElementById('multiVideo-'+userId);
+	// multiVideo.srcObject = janusStreams[userId];
+
+	// janusStreams[userId].getTracks().forEach(track => {
+	// 	janusStreamPeers[userId].addTrack(track, janusStreams[userId]);
+	// });
+
+	janus.editRoom(ws, 64000);
+})
