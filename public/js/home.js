@@ -198,7 +198,7 @@ const getMessage = (message) => {
 const plusOne = (id) => {
 	people[id] = true;
 	let nop = Object.keys(people).length;
-	if(nop == 3){
+	if(nop == 2){
 		mediaConstraint = {
 			video: {
 				width:{min: four[0], ideal: four[0]}, 
@@ -212,7 +212,7 @@ const plusOne = (id) => {
 		};
 		bitrate = four[2];
 		changeConfig();
-	} else if (nop == 5) {
+	} else if (nop == 3) {
 		mediaConstraint = {
 			video: {
 				width:{min: nine[0], ideal: nine[0]}, 
@@ -226,7 +226,7 @@ const plusOne = (id) => {
 		}
 		bitrate = nine[2];
 		changeConfig();
-	} else if (nop == 10) {
+	} else if (nop == 4) {
 		mediaConstraint = {
 			video: {
 				width:{min: sixteen[0], ideal: sixteen[0]}, 
@@ -240,7 +240,7 @@ const plusOne = (id) => {
 		};
 		bitrate = sixteen[2];
 		changeConfig();
-	} else if (nop == 17) {
+	} else if (nop == 5) {
 		mediaConstraint = {
 			video: {
 				width:{min: twentyfive[0], ideal: fotwentyfiveur[0]}, 
