@@ -209,9 +209,6 @@ const plusOne = (id) => {
 			} 
 		};
 		bitrate = four[2];
-		if(userId == 'a1'){
-			janus.editRoom(ws, bitrate);
-		}
 		changeConfig();
 	} else if (nop == 5) {
 		mediaConstraint = {
@@ -226,9 +223,6 @@ const plusOne = (id) => {
 			} 
 		}
 		bitrate = nine[2];
-		if(userId == 'a1'){
-			janus.editRoom(ws, bitrate);
-		}
 		changeConfig();
 	} else if (nop == 10) {
 		mediaConstraint = {
@@ -243,9 +237,6 @@ const plusOne = (id) => {
 			} 
 		};
 		bitrate = sixteen[2];
-		if(userId == 'a1'){
-			janus.editRoom(ws, bitrate);
-		}
 		changeConfig();
 	} else if (nop == 17) {
 		mediaConstraint = {
@@ -260,9 +251,6 @@ const plusOne = (id) => {
 			} 
 		}
 		bitrate = twentyfive[2];
-		if(userId == 'a1'){
-			janus.editRoom(ws, bitrate);
-		}
 		changeConfig();
 	} 
 }
@@ -283,9 +271,6 @@ const minusOne = (id) => {
 			} 
 		};
 		bitrate = four[2];
-		if(id == 'a1'){
-			janus.editRoom(ws, bitrate);
-		}
 		changeConfig();
 	} else if (nop == 4) {
 		mediaConstraint = {
@@ -300,9 +285,6 @@ const minusOne = (id) => {
 			} 
 		}
 		bitrate = nine[2];
-		if(id == 'a1'){
-			janus.editRoom(ws, bitrate);
-		}
 		changeConfig();
 	} else if (nop == 9) {
 		mediaConstraint = {
@@ -317,9 +299,6 @@ const minusOne = (id) => {
 			} 
 		};
 		bitrate = sixteen[2];
-		if(id == 'a1'){
-			janus.editRoom(ws, bitrate);
-		}
 		changeConfig();
 	} else if (nop == 16) {
 		mediaConstraint = {
@@ -334,9 +313,6 @@ const minusOne = (id) => {
 			} 
 		}
 		bitrate = twentyfive[2];
-		if(id == 'a1'){
-			janus.editRoom(ws, bitrate);
-		}
 		changeConfig();
 	} 
 }
@@ -538,7 +514,6 @@ janus.createVideoRoom = (ws) => {
 		body : {
 			request: 'create',
 			room: 35610863,
-			bitrate,
 			publishers: 100
 		}
 	};
