@@ -169,10 +169,15 @@ const getMessage = (message) => {
 					createSDPAnswer(messageObj);
 				}
 
-				if(subscribeFlag.checked && messageObj.plugindata.data.videoroom != 'joined' && messageObj.plugindata.data.publishers && messageObj.plugindata.data.publishers.length > 0){
+				if(messageObj.plugindata.data.videoroom != 'joined' && messageObj.plugindata.data.publishers && messageObj.plugindata.data.publishers.length > 0){
 					subscriberFeedId[messageObj.plugindata.data.publishers[0].display] = messageObj.plugindata.data.publishers[0].id;
 					feedIdToId[messageObj.plugindata.data.publishers[0].id] = messageObj.plugindata.data.publishers[0].display;
-					janus.attachPlugin(ws, messageObj.plugindata.data.publishers[0].display, session_id, 'janus.plugin.videoroom', false );
+					
+					if(subscribeFlag.checked){
+						janus.attachPlugin(ws, messageObj.plugindata.data.publishers[0].display, session_id, 'janus.plugin.videoroom', false );
+					} else {
+						plusOne(messageObj.plugindata.data.publishers[0].id);
+					}
 				}
 				
 				if(messageObj.plugindata.data.leaving){
