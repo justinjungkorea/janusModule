@@ -2,7 +2,6 @@ const printBox = document.getElementById('printBox');
 const userBtns = document.getElementsByClassName('userBtn');
 const videoFlag = document.getElementById("videoFlag");
 const videoBox = document.getElementById("videoBox");
-const changeConfig = document.getElementById("changeConfig");
 
 // var janusUrl = 'ws://106.240.247.43:8188';
 var janusUrl = 'ws://106.240.247.43:3561';
@@ -184,7 +183,7 @@ const getMessage = (message) => {
 					janusStreamPeers[tempId] = null;
 					delete janusStreamPeers[tempId];
 
-					delete people[tempId];
+					minusOne(tempId);
 				}
 				
 			}
@@ -194,6 +193,153 @@ const getMessage = (message) => {
 	}
 }
 
+const plusOne = () => {
+	people[userId] = true;
+	let nop = Object.keys(people).length;
+	if(nop == 3){
+		mediaConstraint = {
+			video: {
+				width:{min: four[0], ideal: four[0]}, 
+				height:{min: four[1], ideal: four[1]}
+			}, 
+			audio: true, 
+			frameRate: { 
+				ideal: 10, 
+				max: 10 
+			} 
+		};
+		bitrate = four[2];
+		if(userId == 'a1'){
+			janus.editRoom(ws, bitrate);
+		}
+		changeConfig();
+	} else if (nop == 5) {
+		mediaConstraint = {
+			video: {
+				width:{min: nine[0], ideal: nine[0]}, 
+				height:{min: nine[1], ideal: nine[1]}
+			}, 
+			audio: true, 
+			frameRate: { 
+				ideal: 10, 
+				max: 10 
+			} 
+		}
+		bitrate = nine[2];
+		if(userId == 'a1'){
+			janus.editRoom(ws, bitrate);
+		}
+		changeConfig();
+	} else if (nop == 10) {
+		mediaConstraint = {
+			video: {
+				width:{min: sixteen[0], ideal: sixteen[0]}, 
+				height:{min: sixteen[1], ideal: sixteen[1]}
+			}, 
+			audio: true, 
+			frameRate: { 
+				ideal: 10, 
+				max: 10 
+			} 
+		};
+		bitrate = sixteen[2];
+		if(userId == 'a1'){
+			janus.editRoom(ws, bitrate);
+		}
+		changeConfig();
+	} else if (nop == 17) {
+		mediaConstraint = {
+			video: {
+				width:{min: twentyfive[0], ideal: fotwentyfiveur[0]}, 
+				height:{min: twentyfive[1], ideal: twentyfive[1]}
+			}, 
+			audio: true, 
+			frameRate: { 
+				ideal: 10, 
+				max: 10 
+			} 
+		}
+		bitrate = twentyfive[2];
+		if(userId == 'a1'){
+			janus.editRoom(ws, bitrate);
+		}
+		changeConfig();
+	} 
+}
+
+const minusOne = (id) => {
+	delete people[id];
+	let nop = Object.keys(people).length;
+	if(nop == 2){
+		mediaConstraint = {
+			video: {
+				width:{min: four[0], ideal: four[0]}, 
+				height:{min: four[1], ideal: four[1]}
+			}, 
+			audio: true, 
+			frameRate: { 
+				ideal: 10, 
+				max: 10 
+			} 
+		};
+		bitrate = four[2];
+		if(id == 'a1'){
+			janus.editRoom(ws, bitrate);
+		}
+		changeConfig();
+	} else if (nop == 4) {
+		mediaConstraint = {
+			video: {
+				width:{min: nine[0], ideal: nine[0]}, 
+				height:{min: nine[1], ideal: nine[1]}
+			}, 
+			audio: true, 
+			frameRate: { 
+				ideal: 10, 
+				max: 10 
+			} 
+		}
+		bitrate = nine[2];
+		if(id == 'a1'){
+			janus.editRoom(ws, bitrate);
+		}
+		changeConfig();
+	} else if (nop == 9) {
+		mediaConstraint = {
+			video: {
+				width:{min: sixteen[0], ideal: sixteen[0]}, 
+				height:{min: sixteen[1], ideal: sixteen[1]}
+			}, 
+			audio: true, 
+			frameRate: { 
+				ideal: 10, 
+				max: 10 
+			} 
+		};
+		bitrate = sixteen[2];
+		if(id == 'a1'){
+			janus.editRoom(ws, bitrate);
+		}
+		changeConfig();
+	} else if (nop == 16) {
+		mediaConstraint = {
+			video: {
+				width:{min: twentyfive[0], ideal: fotwentyfiveur[0]}, 
+				height:{min: twentyfive[1], ideal: twentyfive[1]}
+			}, 
+			audio: true, 
+			frameRate: { 
+				ideal: 10, 
+				max: 10 
+			} 
+		}
+		bitrate = twentyfive[2];
+		if(id == 'a1'){
+			janus.editRoom(ws, bitrate);
+		}
+		changeConfig();
+	} 
+}
 const createVideoBox = userId => {
     let videoContainner = document.createElement("div");
     videoContainner.classList = "multi-video";
@@ -222,7 +368,8 @@ const createVideoBox = userId => {
 
 	videoBox.appendChild(videoContainner);
 	
-	people[userId] = true;
+	plusOne();
+	
 }
 
 const createSDPOffer = async userId => {
@@ -308,6 +455,20 @@ const createSDPAnswer = async data => {
 			ws.send(JSON.stringify(msg));
 		}
 	}
+}
+
+const changeConfig = () => {
+	
+	navigator.mediaDevices.getUserMedia(mediaConstraint).then(stream => {
+		let videoTrack = stream.getVideoTracks()[0];
+		var sender = janusStreamPeers[userId].getSenders().find(s => {
+			return s.track.kind == videoTrack.kind;
+		});
+		sender.replaceTrack(videoTrack);
+		janusStreams[userId] = stream;
+	}).catch(err => {
+		console.log('Error ::: ', err);
+	});
 }
 
 
@@ -550,19 +711,3 @@ for(i=0;i<userBtns.length;++i){
 		document.getElementById('user').style.display = 'none'
     })
 }
-
-changeConfig.addEventListener('click', async () => {
-	
-	janusStreams[userId].getVideoTracks()[0].stop();
-	janusStreams[userId].getAudioTracks()[0].stop();
-	
-	janusStreams[userId] = await navigator.mediaDevices.getDisplayMedia({video:true});;
-	// let multiVideo = document.getElementById('multiVideo-'+userId);
-	// multiVideo.srcObject = janusStreams[userId];
-
-	// janusStreams[userId].getTracks().forEach(track => {
-	// 	janusStreamPeers[userId].addTrack(track, janusStreams[userId]);
-	// });
-
-	janus.editRoom(ws, 64000);
-})
