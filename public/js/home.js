@@ -602,7 +602,8 @@ janus.publish = (ws) => {
 		body: {
 			request: 'publish ',
 			audio: false,
-			video: true
+			video: true,
+			bitrate: bitrate
 		}
 	}
 
@@ -621,7 +622,8 @@ janus.createOffer = (ws,sdp) => {
 			request: 'publish',
 			video: true,
 			audio: false,
-			display: userId
+			display: userId,
+			bitrate
 		},
 		jsep: {
 			type: sdp.type,
