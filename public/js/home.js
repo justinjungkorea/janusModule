@@ -263,6 +263,20 @@ const minusOne = (id) => {
 	if(nop == 2){
 		mediaConstraint = {
 			video: {
+				width:{min: two[0], ideal: two[0]}, 
+				height:{min: two[1], ideal: two[1]}
+			}, 
+			audio: true, 
+			frameRate: { 
+				ideal: 15, 
+				max: 15 
+			} 
+		};
+		bitrate = two[2];
+		changeConfig();
+	} else if (nop == 4) {
+		mediaConstraint = {
+			video: {
 				width:{min: four[0], ideal: four[0]}, 
 				height:{min: four[1], ideal: four[1]}
 			}, 
@@ -271,10 +285,10 @@ const minusOne = (id) => {
 				ideal: 10, 
 				max: 10 
 			} 
-		};
+		}
 		bitrate = four[2];
 		changeConfig();
-	} else if (nop == 4) {
+	} else if (nop == 9) {
 		mediaConstraint = {
 			video: {
 				width:{min: nine[0], ideal: nine[0]}, 
@@ -285,10 +299,10 @@ const minusOne = (id) => {
 				ideal: 10, 
 				max: 10 
 			} 
-		}
+		};
 		bitrate = nine[2];
 		changeConfig();
-	} else if (nop == 9) {
+	} else if (nop == 16) {
 		mediaConstraint = {
 			video: {
 				width:{min: sixteen[0], ideal: sixteen[0]}, 
@@ -299,22 +313,8 @@ const minusOne = (id) => {
 				ideal: 10, 
 				max: 10 
 			} 
-		};
-		bitrate = sixteen[2];
-		changeConfig();
-	} else if (nop == 16) {
-		mediaConstraint = {
-			video: {
-				width:{min: twentyfive[0], ideal: fotwentyfiveur[0]}, 
-				height:{min: twentyfive[1], ideal: twentyfive[1]}
-			}, 
-			audio: true, 
-			frameRate: { 
-				ideal: 10, 
-				max: 10 
-			} 
 		}
-		bitrate = twentyfive[2];
+		bitrate = sixteen[2];
 		changeConfig();
 	} 
 }
