@@ -2,6 +2,7 @@ const printBox = document.getElementById('printBox');
 const userBtns = document.getElementsByClassName('userBtn');
 const videoFlag = document.getElementById("videoFlag");
 const videoBox = document.getElementById("videoBox");
+const subscribeFlag = document.getElementById('subscribeFlag');
 
 // var janusUrl = 'ws://106.240.247.43:8188';
 var janusUrl = 'ws://106.240.247.43:3561';
@@ -162,8 +163,10 @@ const getMessage = (message) => {
 				}
 				
 				if(messageObj.jsep && messageObj.jsep.type === 'offer'){
-					createVideoBox(messageObj.plugindata.data.display);
-					createSDPAnswer(messageObj);
+					if(subscribeFlag){
+						createVideoBox(messageObj.plugindata.data.display);
+						createSDPAnswer(messageObj);
+					}
 				}
 
 				if(messageObj.plugindata.data.videoroom != 'joined' && messageObj.plugindata.data.publishers && messageObj.plugindata.data.publishers.length > 0){
