@@ -142,13 +142,15 @@ const getMessage = (message) => {
 				if(messageObj.plugindata.data.videoroom == 'joined'){
 					feedId = messageObj.plugindata.data.id;
 					let publishers = messageObj.plugindata.data.publishers;
-					publishers.forEach(element => {
-						subscriberFeedId[element.display] = element.id;
-						feedIdToId[element.id] = element.display;
-						janus.attachPlugin(ws,element.display,session_id,'janus.plugin.videoroom', false);
-						// createVideoBox(element.display);
-						// createSDPAnswer(element.display);
-					})
+					if(subscribeFlag.checked){
+						publishers.forEach(element => {
+							subscriberFeedId[element.display] = element.id;
+							feedIdToId[element.id] = element.display;
+							janus.attachPlugin(ws,element.display,session_id,'janus.plugin.videoroom', false);
+							// createVideoBox(element.display);
+							// createSDPAnswer(element.display);
+						})
+					}
 					setTimeout(()=>{
 						createVideoBox(userId);
 						createSDPOffer(userId);
@@ -163,10 +165,8 @@ const getMessage = (message) => {
 				}
 				
 				if(messageObj.jsep && messageObj.jsep.type === 'offer'){
-					if(subscribeFlag){
-						createVideoBox(messageObj.plugindata.data.display);
-						createSDPAnswer(messageObj);
-					}
+					createVideoBox(messageObj.plugindata.data.display);
+					createSDPAnswer(messageObj);
 				}
 
 				if(messageObj.plugindata.data.videoroom != 'joined' && messageObj.plugindata.data.publishers && messageObj.plugindata.data.publishers.length > 0){
