@@ -193,8 +193,8 @@ const getMessage = (message) => {
 	}
 }
 
-const plusOne = () => {
-	people[userId] = true;
+const plusOne = (id) => {
+	people[id] = true;
 	let nop = Object.keys(people).length;
 	if(nop == 3){
 		mediaConstraint = {
@@ -368,7 +368,7 @@ const createVideoBox = userId => {
 
 	videoBox.appendChild(videoContainner);
 	
-	plusOne();
+	plusOne(userId);
 	
 }
 
