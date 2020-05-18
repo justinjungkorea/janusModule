@@ -444,6 +444,7 @@ const changeConfig = () => {
 		});
 		sender.replaceTrack(videoTrack);
 		janusStreams[userId] = stream;
+		console.log(`${userId} ::: ${mediaConstraint.video}`)
 	}).catch(err => {
 		console.log('Error ::: ', err);
 	});
