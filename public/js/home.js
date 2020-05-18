@@ -243,7 +243,7 @@ const plusOne = (id) => {
 	} else if (nop == 5) {
 		mediaConstraint = {
 			video: {
-				width:{min: twentyfive[0], ideal: fotwentyfiveur[0]}, 
+				width:{min: twentyfive[0], ideal: twentyfive[0]}, 
 				height:{min: twentyfive[1], ideal: twentyfive[1]}
 			}, 
 			audio: true, 
