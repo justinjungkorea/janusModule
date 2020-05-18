@@ -211,6 +211,7 @@ const plusOne = (id) => {
 			} 
 		};
 		bitrate = four[2];
+		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
 		changeConfig();
 	} else if (nop == 3) {
 		mediaConstraint = {
@@ -225,6 +226,7 @@ const plusOne = (id) => {
 			} 
 		}
 		bitrate = nine[2];
+		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(30%, auto))";
 		changeConfig();
 	} else if (nop == 4) {
 		mediaConstraint = {
@@ -239,6 +241,7 @@ const plusOne = (id) => {
 			} 
 		};
 		bitrate = sixteen[2];
+		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(25%, auto))";
 		changeConfig();
 	} else if (nop == 5) {
 		mediaConstraint = {
@@ -253,6 +256,7 @@ const plusOne = (id) => {
 			} 
 		}
 		bitrate = twentyfive[2];
+		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(20%, auto))";
 		changeConfig();
 	} 
 }

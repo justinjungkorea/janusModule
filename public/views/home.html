@@ -28,9 +28,11 @@
         }
         #videoBox {
             display: inline-grid;
-            grid-template-columns: auto auto auto;
+            grid-template-columns: repeat(auto-fill, minmax(100%, auto));
         }
-        #videoBox video {width: 100%; }
+        #videoBox video {
+            width: 100%; 
+        }
         .multi-video {
             border: 1px solid black;
             margin: 2px;
