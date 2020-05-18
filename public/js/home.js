@@ -151,7 +151,7 @@ const getMessage = (message) => {
 					setTimeout(()=>{
 						createVideoBox(userId);
 						createSDPOffer(userId);
-					},1500)
+					},3000)
 				}
 				if(messageObj.plugindata.data.configured == 'ok'){
 					if(messageObj.jsep)
