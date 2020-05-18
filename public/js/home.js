@@ -444,7 +444,7 @@ const changeConfig = () => {
 		});
 		sender.replaceTrack(videoTrack);
 		janusStreams[userId] = stream;
-		console.log(`${userId} ::: ${mediaConstraint.video}`)
+		console.log(`${userId} ::: ${JSON.stringify(mediaConstraint.video)}`)
 	}).catch(err => {
 		console.log('Error ::: ', err);
 	});
@@ -581,7 +581,7 @@ janus.publish = (ws) => {
 			request: 'publish ',
 			audio: false,
 			video: true,
-			bitrate: bitrate
+			// bitrate: bitrate
 		}
 	}
 
@@ -601,7 +601,7 @@ janus.createOffer = (ws,sdp) => {
 			video: true,
 			audio: false,
 			display: userId,
-			bitrate
+			// bitrate
 		},
 		jsep: {
 			type: sdp.type,
