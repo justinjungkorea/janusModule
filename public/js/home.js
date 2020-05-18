@@ -201,7 +201,22 @@ const getMessage = (message) => {
 const plusOne = (id) => {
 	people[id] = true;
 	let nop = Object.keys(people).length;
-	if(nop == 3){
+	if(nop == 2){
+		mediaConstraint = {
+			video: {
+				width:{min: two[0], ideal: two[0]}, 
+				height:{min: two[1], ideal: two[1]}
+			}, 
+			audio: true, 
+			frameRate: { 
+				ideal: 15, 
+				max: 15
+			} 
+		};
+		bitrate = two[2];
+		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
+		changeConfig();
+	} else if(nop == 3){
 		mediaConstraint = {
 			video: {
 				width:{min: four[0], ideal: four[0]}, 
