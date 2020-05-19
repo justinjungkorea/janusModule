@@ -22,19 +22,19 @@ let feedId;
 let userId;
 let people = {};
 
-let two = [1280, 720, 1382000];
-let four = [960, 540, 518000];
-let nine = [640, 360, 230000];
-let sixteen = [480, 270, 129000];
-let twentyfive = [240, 135, 64000];
+let two = [1280, 720, 1382000, 30];
+let four = [960, 540, 518000, 15];
+let nine = [640, 360, 230000, 15];
+let sixteen = [480, 270, 129000, 15];
+let twentyfive = [240, 135, 64000, 15];
 
 let mediaConstraint = {
     video: {
         width:{min: two[0], ideal: two[0]}, 
         height:{min: two[1], ideal: two[1]}, 
 		frameRate: { 
-			ideal: 15, 
-			max: 15 
+			ideal: two[3], 
+			max: two[3] 
 		} 
     }, 
     audio: true
@@ -217,8 +217,8 @@ const plusOne = (id) => {
 				width:{min: two[0], ideal: two[0]}, 
 				height:{min: two[1], ideal: two[1]}, 
 				frameRate: { 
-					ideal: 15, 
-					max: 15 
+					ideal: two[3], 
+					max: two[3] 
 				} 
 			}, 
 			audio: true
@@ -232,8 +232,8 @@ const plusOne = (id) => {
 				width:{min: four[0], ideal: four[0]}, 
 				height:{min: four[1], ideal: four[1]}, 
 				frameRate: { 
-					ideal: 15, 
-					max: 15 
+					ideal: four[3], 
+					max: four[3] 
 				} 
 			}, 
 			audio: true
@@ -247,8 +247,8 @@ const plusOne = (id) => {
 				width:{min: nine[0], ideal: nine[0]}, 
 				height:{min: nine[1], ideal: nine[1]}, 
 				frameRate: { 
-					ideal: 15, 
-					max: 15 
+					ideal: nine[3], 
+					max: nine[3] 
 				} 
 			}, 
 			audio: true
@@ -262,8 +262,8 @@ const plusOne = (id) => {
 				width:{min: sixteen[0], ideal: sixteen[0]}, 
 				height:{min: sixteen[1], ideal: sixteen[1]},
 				frameRate: { 
-					ideal: 15, 
-					max: 15 
+					ideal: sixteen[3], 
+					max: sixteen[3] 
 				} 
 			}, 
 			audio: true
@@ -279,8 +279,8 @@ const plusOne = (id) => {
 			}, 
 			audio: true, 
 			frameRate: { 
-				ideal: 15, 
-				max: 15 
+				ideal: twentyfive[3], 
+				max: twentyfive [3]
 			} 
 		}
 		bitrate = twentyfive[2];
@@ -298,8 +298,8 @@ const plusOne2 = (id) => {
 				width:{min: two[0], ideal: two[0]}, 
 				height:{min: two[1], ideal: two[1]}, 
 				frameRate: { 
-					ideal: 15, 
-					max: 15 
+					ideal: two[3], 
+					max: two[3] 
 				} 
 			}, 
 			audio: true
@@ -313,8 +313,8 @@ const plusOne2 = (id) => {
 				width:{min: four[0], ideal: four[0]}, 
 				height:{min: four[1], ideal: four[1]}, 
 				frameRate: { 
-					ideal: 15, 
-					max: 15 
+					ideal: four[3], 
+					max: four[3] 
 				} 
 			}, 
 			audio: true
@@ -328,8 +328,8 @@ const plusOne2 = (id) => {
 				width:{min: nine[0], ideal: nine[0]}, 
 				height:{min: nine[1], ideal: nine[1]}, 
 				frameRate: { 
-					ideal: 15, 
-					max: 15 
+					ideal: nine[3], 
+					max: nine[3] 
 				} 
 			}, 
 			audio: true
@@ -343,8 +343,8 @@ const plusOne2 = (id) => {
 				width:{min: sixteen[0], ideal: sixteen[0]}, 
 				height:{min: sixteen[1], ideal: sixteen[1]}, 
 				frameRate: { 
-					ideal: 15, 
-					max: 15 
+					ideal: sixteen[3], 
+					max: sixteen[3] 
 				} 
 			}, 
 			audio: true
@@ -358,8 +358,8 @@ const plusOne2 = (id) => {
 				width:{min: twentyfive[0], ideal: twentyfive[0]}, 
 				height:{min: twentyfive[1], ideal: twentyfive[1]}, 
 				frameRate: { 
-					ideal: 15, 
-					max: 15 
+					ideal: twentyfive[3], 
+					max: twentyfive[3] 
 				} 
 			}, 
 			audio: true
