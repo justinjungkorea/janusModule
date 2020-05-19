@@ -31,13 +31,13 @@ let twentyfive = [240, 135, 64000];
 let mediaConstraint = {
     video: {
         width:{min: two[0], ideal: two[0]}, 
-        height:{min: two[1], ideal: two[1]}
+        height:{min: two[1], ideal: two[1]}, 
+		frameRate: { 
+			ideal: 10, 
+			max: 10 
+		} 
     }, 
-    audio: true, 
-    frameRate: { 
-        ideal: 10, 
-        max: 10 
-    } 
+    audio: true
 };
 
 let bitrate = two[2];
