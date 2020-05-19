@@ -5,8 +5,8 @@ const videoBox = document.getElementById("videoBox");
 const subscribeFlag = document.getElementById('subscribeFlag');
 
 // var janusUrl = 'ws://106.240.247.43:8188';
-var janusUrl = 'ws://106.240.247.43:3561';
-// var janusUrl = 'ws://13.209.65.193:7011';
+// var janusUrl = 'ws://106.240.247.43:3561';
+var janusUrl = 'ws://13.209.65.193:7011';
 // var janusSecret = '19dc9bf617df828f1da469c843c93d327ac36bf1';
 var session_id;
 var publish_id;
