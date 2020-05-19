@@ -215,13 +215,13 @@ const plusOne = (id) => {
 		mediaConstraint = {
 			video: {
 				width:{min: two[0], ideal: two[0]}, 
-				height:{min: two[1], ideal: two[1]}
+				height:{min: two[1], ideal: two[1]}, 
+				frameRate: { 
+					ideal: 10, 
+					max: 10 
+				} 
 			}, 
-			audio: true, 
-			frameRate: { 
-				ideal: 10, 
-				max: 10
-			} 
+			audio: true
 		};
 		bitrate = two[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
@@ -230,13 +230,13 @@ const plusOne = (id) => {
 		mediaConstraint = {
 			video: {
 				width:{min: four[0], ideal: four[0]}, 
-				height:{min: four[1], ideal: four[1]}
+				height:{min: four[1], ideal: four[1]}, 
+				frameRate: { 
+					ideal: 10, 
+					max: 10 
+				} 
 			}, 
-			audio: true, 
-			frameRate: { 
-				ideal: 10, 
-				max: 10 
-			} 
+			audio: true
 		};
 		bitrate = four[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
@@ -245,13 +245,13 @@ const plusOne = (id) => {
 		mediaConstraint = {
 			video: {
 				width:{min: nine[0], ideal: nine[0]}, 
-				height:{min: nine[1], ideal: nine[1]}
+				height:{min: nine[1], ideal: nine[1]}, 
+				frameRate: { 
+					ideal: 10, 
+					max: 10 
+				} 
 			}, 
-			audio: true, 
-			frameRate: { 
-				ideal: 10, 
-				max: 10 
-			} 
+			audio: true
 		}
 		bitrate = nine[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(30%, auto))";
@@ -260,13 +260,13 @@ const plusOne = (id) => {
 		mediaConstraint = {
 			video: {
 				width:{min: sixteen[0], ideal: sixteen[0]}, 
-				height:{min: sixteen[1], ideal: sixteen[1]}
+				height:{min: sixteen[1], ideal: sixteen[1]},
+				frameRate: { 
+					ideal: 10, 
+					max: 10 
+				} 
 			}, 
-			audio: true, 
-			frameRate: { 
-				ideal: 10, 
-				max: 10 
-			} 
+			audio: true
 		};
 		bitrate = sixteen[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(25%, auto))";
@@ -296,13 +296,13 @@ const plusOne2 = (id) => {
 		mediaConstraint = {
 			video: {
 				width:{min: two[0], ideal: two[0]}, 
-				height:{min: two[1], ideal: two[1]}
+				height:{min: two[1], ideal: two[1]}, 
+				frameRate: { 
+					ideal: 10, 
+					max: 10 
+				} 
 			}, 
-			audio: true, 
-			frameRate: { 
-				ideal: 10, 
-				max: 10
-			} 
+			audio: true
 		};
 		bitrate = two[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
@@ -311,13 +311,13 @@ const plusOne2 = (id) => {
 		mediaConstraint = {
 			video: {
 				width:{min: four[0], ideal: four[0]}, 
-				height:{min: four[1], ideal: four[1]}
+				height:{min: four[1], ideal: four[1]}, 
+				frameRate: { 
+					ideal: 10, 
+					max: 10 
+				} 
 			}, 
-			audio: true, 
-			frameRate: { 
-				ideal: 10, 
-				max: 10 
-			} 
+			audio: true
 		};
 		bitrate = four[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
@@ -326,13 +326,13 @@ const plusOne2 = (id) => {
 		mediaConstraint = {
 			video: {
 				width:{min: nine[0], ideal: nine[0]}, 
-				height:{min: nine[1], ideal: nine[1]}
+				height:{min: nine[1], ideal: nine[1]}, 
+				frameRate: { 
+					ideal: 10, 
+					max: 10 
+				} 
 			}, 
-			audio: true, 
-			frameRate: { 
-				ideal: 10, 
-				max: 10 
-			} 
+			audio: true
 		}
 		bitrate = nine[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(30%, auto))";
@@ -341,13 +341,13 @@ const plusOne2 = (id) => {
 		mediaConstraint = {
 			video: {
 				width:{min: sixteen[0], ideal: sixteen[0]}, 
-				height:{min: sixteen[1], ideal: sixteen[1]}
+				height:{min: sixteen[1], ideal: sixteen[1]}, 
+				frameRate: { 
+					ideal: 10, 
+					max: 10 
+				} 
 			}, 
-			audio: true, 
-			frameRate: { 
-				ideal: 10, 
-				max: 10 
-			} 
+			audio: true
 		};
 		bitrate = sixteen[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(25%, auto))";
@@ -356,13 +356,13 @@ const plusOne2 = (id) => {
 		mediaConstraint = {
 			video: {
 				width:{min: twentyfive[0], ideal: twentyfive[0]}, 
-				height:{min: twentyfive[1], ideal: twentyfive[1]}
+				height:{min: twentyfive[1], ideal: twentyfive[1]}, 
+				frameRate: { 
+					ideal: 10, 
+					max: 10 
+				} 
 			}, 
-			audio: true, 
-			frameRate: { 
-				ideal: 10, 
-				max: 10 
-			} 
+			audio: true정
 		}
 		bitrate = twentyfive[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(20%, auto))";
