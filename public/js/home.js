@@ -35,8 +35,8 @@ let mediaConstraint = {
     }, 
     audio: true, 
     frameRate: { 
-        ideal: 15, 
-        max: 15 
+        ideal: 10, 
+        max: 10 
     } 
 };
 
@@ -219,8 +219,8 @@ const plusOne = (id) => {
 			}, 
 			audio: true, 
 			frameRate: { 
-				ideal: 15, 
-				max: 15
+				ideal: 10, 
+				max: 10
 			} 
 		};
 		bitrate = two[2];
@@ -234,8 +234,8 @@ const plusOne = (id) => {
 			}, 
 			audio: true, 
 			frameRate: { 
-				ideal: 15, 
-				max: 15 
+				ideal: 10, 
+				max: 10 
 			} 
 		};
 		bitrate = four[2];
@@ -249,8 +249,8 @@ const plusOne = (id) => {
 			}, 
 			audio: true, 
 			frameRate: { 
-				ideal: 15, 
-				max: 15 
+				ideal: 10, 
+				max: 10 
 			} 
 		}
 		bitrate = nine[2];
@@ -264,8 +264,8 @@ const plusOne = (id) => {
 			}, 
 			audio: true, 
 			frameRate: { 
-				ideal: 15, 
-				max: 15 
+				ideal: 10, 
+				max: 10 
 			} 
 		};
 		bitrate = sixteen[2];
@@ -279,8 +279,8 @@ const plusOne = (id) => {
 			}, 
 			audio: true, 
 			frameRate: { 
-				ideal: 15, 
-				max: 15 
+				ideal: 10, 
+				max: 10 
 			} 
 		}
 		bitrate = twentyfive[2];
@@ -300,8 +300,8 @@ const plusOne2 = (id) => {
 			}, 
 			audio: true, 
 			frameRate: { 
-				ideal: 15, 
-				max: 15
+				ideal: 10, 
+				max: 10
 			} 
 		};
 		bitrate = two[2];
@@ -315,8 +315,8 @@ const plusOne2 = (id) => {
 			}, 
 			audio: true, 
 			frameRate: { 
-				ideal: 15, 
-				max: 15 
+				ideal: 10, 
+				max: 10 
 			} 
 		};
 		bitrate = four[2];
@@ -330,8 +330,8 @@ const plusOne2 = (id) => {
 			}, 
 			audio: true, 
 			frameRate: { 
-				ideal: 15, 
-				max: 15 
+				ideal: 10, 
+				max: 10 
 			} 
 		}
 		bitrate = nine[2];
@@ -345,8 +345,8 @@ const plusOne2 = (id) => {
 			}, 
 			audio: true, 
 			frameRate: { 
-				ideal: 15, 
-				max: 15 
+				ideal: 10, 
+				max: 10 
 			} 
 		};
 		bitrate = sixteen[2];
@@ -360,8 +360,8 @@ const plusOne2 = (id) => {
 			}, 
 			audio: true, 
 			frameRate: { 
-				ideal: 15, 
-				max: 15 
+				ideal: 10, 
+				max: 10 
 			} 
 		}
 		bitrate = twentyfive[2];
@@ -381,8 +381,8 @@ const minusOne = (id) => {
 			}, 
 			audio: true, 
 			frameRate: { 
-				ideal: 15, 
-				max: 15 
+				ideal: 10, 
+				max: 10 
 			} 
 		};
 		bitrate = two[2];
@@ -395,8 +395,8 @@ const minusOne = (id) => {
 			}, 
 			audio: true, 
 			frameRate: { 
-				ideal: 15, 
-				max: 15 
+				ideal: 10, 
+				max: 10 
 			} 
 		}
 		bitrate = four[2];
@@ -409,8 +409,8 @@ const minusOne = (id) => {
 			}, 
 			audio: true, 
 			frameRate: { 
-				ideal: 15, 
-				max: 15 
+				ideal: 10, 
+				max: 10 
 			} 
 		};
 		bitrate = nine[2];
@@ -423,8 +423,8 @@ const minusOne = (id) => {
 			}, 
 			audio: true, 
 			frameRate: { 
-				ideal: 15, 
-				max: 15 
+				ideal: 10, 
+				max: 10 
 			} 
 		}
 		bitrate = sixteen[2];
