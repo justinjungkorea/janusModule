@@ -362,7 +362,7 @@ const plusOne2 = (id) => {
 					max: 10 
 				} 
 			}, 
-			audio: true정
+			audio: true
 		}
 		bitrate = twentyfive[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(20%, auto))";
