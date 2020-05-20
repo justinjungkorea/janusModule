@@ -551,7 +551,7 @@ const createSDPAnswer = async data => {
 }
 
 const changeConfig = () => {
-	if(Object.keys(people).length>=2){
+	if(janusStreams[userId]){
 		navigator.mediaDevices.getUserMedia(mediaConstraint).then(stream => {
 			let videoTrack = stream.getVideoTracks()[0];
 			var sender = janusStreamPeers[userId].getSenders().find(s => {
