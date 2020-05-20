@@ -9,7 +9,7 @@ window.onload = function() {
 
     // grab our canvas
 	canvasContext = document.getElementById( "meter" ).getContext("2d");
-	
+	// document.getElementById('meter').style.display = 'none';
     // monkeypatch Web Audio
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	
@@ -66,10 +66,14 @@ function onLevelChange( time ) {
     canvasContext.clearRect(0,0,WIDTH,HEIGHT);
 
     // check if we're currently clipping
-    if (meter.checkClipping())
+    if (meter.checkClipping()){
         canvasContext.fillStyle = "red";
-    else
+        document.getElementById('speaking').innerText = "speaking";
+    }
+    else{
         canvasContext.fillStyle = "green";
+        document.getElementById('speaking').innerText = "not speaking";
+    }
 
 
     // draw a bar based on the current volume
