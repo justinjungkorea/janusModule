@@ -155,10 +155,8 @@ const getMessage = (message) => {
 						// createSDPAnswer(element.display);
 						
 					})
-					setTimeout(()=>{
-						createVideoBox(userId);
-						createSDPOffer(userId);
-					},1000)
+					createVideoBox(userId);
+					createSDPOffer(userId);
 				}
 				if(messageObj.plugindata.data.configured == 'ok'){
 					if(messageObj.jsep)
@@ -553,18 +551,19 @@ const createSDPAnswer = async data => {
 }
 
 const changeConfig = () => {
-	
-	navigator.mediaDevices.getUserMedia(mediaConstraint).then(stream => {
-		let videoTrack = stream.getVideoTracks()[0];
-		var sender = janusStreamPeers[userId].getSenders().find(s => {
-			return s.track.kind == videoTrack.kind;
+	if(Object.keys(people).length>=2){
+		navigator.mediaDevices.getUserMedia(mediaConstraint).then(stream => {
+			let videoTrack = stream.getVideoTracks()[0];
+			var sender = janusStreamPeers[userId].getSenders().find(s => {
+				return s.track.kind == videoTrack.kind;
+			});
+			sender.replaceTrack(videoTrack);
+			janusStreams[userId] = stream;
+			console.log(`${userId} ::: ${JSON.stringify(mediaConstraint.video)}`)
+		}).catch(err => {
+			console.log('Error ::: ', err);
 		});
-		sender.replaceTrack(videoTrack);
-		janusStreams[userId] = stream;
-		console.log(`${userId} ::: ${JSON.stringify(mediaConstraint.video)}`)
-	}).catch(err => {
-		console.log('Error ::: ', err);
-	});
+	}
 }
 
 
