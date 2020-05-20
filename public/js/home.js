@@ -121,7 +121,7 @@ const getMessage = (message) => {
 						subscriber_ids[tempId] = messageObj.data.id;
 						setTimeout(()=>{
 							janus.joinSubscriber(ws, 35610863, tempId, subscriberFeedId[tempId]);
-						}, 1000);
+						}, 3000);
 						break;
 					case 'createVideoRoom':
 						janus.joinVideoRoom(ws,35610863)
@@ -158,7 +158,7 @@ const getMessage = (message) => {
 					setTimeout(()=>{
 						createVideoBox(userId);
 						createSDPOffer(userId);
-					},3000)
+					},1000)
 				}
 				if(messageObj.plugindata.data.configured == 'ok'){
 					if(messageObj.jsep)
