@@ -510,12 +510,11 @@ const createSDPAnswer = async data => {
 		var previousData = 0;
         getStats(janusStreamPeers[tempId], result => {
 			if(result.video.bytesReceived !== 0){
-				console.log(result.audio.bytesReceived*8, previousData)
                 if(document.getElementById(`bitrate-${tempId}`) && document.getElementById(`resolutions-${tempId}`)){
                     // document.getElementById(`bitrate-${tempId}`).innerText = Math.ceil(result.video.bytesReceived*8 / cnt);
-                    document.getElementById(`bitrate-${tempId}`).innerText = result.video.bytesReceived*8 - previousData;
+                    document.getElementById(`bitrate-${tempId}`).innerText = result.audio.bytesReceived*8 - previousData;
 					document.getElementById(`resolutions-${tempId}`).innerText = result.resolutions.recv.width+"*"+result.resolutions.recv.height;
-					previousData = result.video.bytesReceived*8;
+					previousData = result.audio.bytesReceived*8;
                 }
                 cnt++;
               }
