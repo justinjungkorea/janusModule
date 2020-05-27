@@ -633,7 +633,8 @@ janus.createVideoRoom = (ws) => {
 		body : {
 			request: 'create',
 			room: 35610863,
-			publishers: 100
+			publishers: 100,
+			audiocodec: opus
 		}
 	};
 
