@@ -179,7 +179,6 @@ const getMessage = (message) => {
 						janus.attachPlugin(ws, messageObj.plugindata.data.publishers[0].display, session_id, 'janus.plugin.videoroom', false );
 					} else {
 						plusOne2(messageObj.plugindata.data.publishers[0].id);
-						console.log(`${messageObj.plugindata.data.publishers[0].id} joined, total : ${Object.keys(people).length}`)
 					}
 				}
 				
