@@ -475,11 +475,11 @@ const createSDPOffer = async userId => {
 		janusStreamPeers[userId].addTrack(track, janusStreams[userId]);
 
 		var cnt = 1;
+		var previoutData = 0;
         getStats(janusStreamPeers[userId], result => {
             if(result){
-                document.getElementById(`bitrate-${userId}`).innerText = Math.ceil(result.audio.bytesSent*8 / cnt);
-                document.getElementById(`resolutions-${userId}`).innerText = result.resolutions.send.width+"*"+result.resolutions.send.height;;
-                cnt++;
+                document.getElementById(`bitrate-${userId}`).innerText = result.audio.bytesSent*8 - previoutData;
+                document.getElementById(`resolutions-${userId}`).innerText = result.resolutions.send.width+"*"+result.resolutions.send.height;;				previoutData = result.audio.bytesSent*8;
             }
         }, 1000);
 	});
@@ -509,7 +509,7 @@ const createSDPAnswer = async data => {
 		var cnt = 1;
 		var previousData = 0;
         getStats(janusStreamPeers[tempId], result => {
-			if(result.video.bytesReceived !== 0){
+			if(result.audio.bytesReceived !== 0){
                 if(document.getElementById(`bitrate-${tempId}`) && document.getElementById(`resolutions-${tempId}`)){
                     // document.getElementById(`bitrate-${tempId}`).innerText = Math.ceil(result.video.bytesReceived*8 / cnt);
                     document.getElementById(`bitrate-${tempId}`).innerText = result.audio.bytesReceived*8 - previousData;
