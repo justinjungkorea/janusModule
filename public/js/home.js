@@ -694,7 +694,7 @@ janus.publish = (ws) => {
 		transaction: trxid,
 		body: {
 			request: 'publish ',
-			audio: false,
+			audio: true,
 			video: true,
 			// bitrate: bitrate
 		}
@@ -714,7 +714,7 @@ janus.createOffer = (ws,sdp) => {
 		body:{
 			request: 'publish',
 			video: true,
-			audio: false,
+			audio: true,
 			display: userId,
 			// bitrate
 		},
