@@ -537,7 +537,7 @@ const createSDPAnswer = async data => {
 				request: "start",
 				room: 35610863,
 				video: true,
-				audio: false
+				audio: true
 				},
 				jsep: janusStreamPeers[tempId].localDescription
 			};
