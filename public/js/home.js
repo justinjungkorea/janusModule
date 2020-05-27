@@ -37,7 +37,7 @@ let mediaConstraint = {
 			max: two[3] 
 		} 
     }, 
-    audio: true
+    audio: { echoCancellation: true, noiseSuppression: true} 
 };
 
 let bitrate = two[2];
@@ -218,7 +218,7 @@ const plusOne = (id) => {
 					max: two[3] 
 				} 
 			}, 
-			audio: true
+			audio: { echoCancellation: true, noiseSuppression: true} 
 		};
 		bitrate = two[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
@@ -233,7 +233,7 @@ const plusOne = (id) => {
 					max: four[3] 
 				} 
 			}, 
-			audio: true
+			audio: { echoCancellation: true, noiseSuppression: true} 
 		};
 		bitrate = four[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
@@ -248,7 +248,7 @@ const plusOne = (id) => {
 					max: nine[3] 
 				} 
 			}, 
-			audio: true
+			audio: { echoCancellation: true, noiseSuppression: true} 
 		}
 		bitrate = nine[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(30%, auto))";
@@ -263,7 +263,7 @@ const plusOne = (id) => {
 					max: sixteen[3] 
 				} 
 			}, 
-			audio: true
+			audio: { echoCancellation: true, noiseSuppression: true} 
 		};
 		bitrate = sixteen[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(25%, auto))";
@@ -274,7 +274,7 @@ const plusOne = (id) => {
 				width:{min: twentyfive[0], ideal: twentyfive[0]}, 
 				height:{min: twentyfive[1], ideal: twentyfive[1]}
 			}, 
-			audio: true, 
+			audio: { echoCancellation: true, noiseSuppression: true} , 
 			frameRate: { 
 				ideal: twentyfive[3], 
 				max: twentyfive [3]
@@ -299,7 +299,7 @@ const plusOne2 = (id) => {
 					max: two[3] 
 				} 
 			}, 
-			audio: true
+			audio: { echoCancellation: true, noiseSuppression: true} 
 		};
 		bitrate = two[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
@@ -314,7 +314,7 @@ const plusOne2 = (id) => {
 					max: four[3] 
 				} 
 			}, 
-			audio: true
+			audio: { echoCancellation: true, noiseSuppression: true} 
 		};
 		bitrate = four[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
@@ -329,7 +329,7 @@ const plusOne2 = (id) => {
 					max: nine[3] 
 				} 
 			}, 
-			audio: true
+			audio: { echoCancellation: true, noiseSuppression: true} 
 		}
 		bitrate = nine[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(30%, auto))";
@@ -344,7 +344,7 @@ const plusOne2 = (id) => {
 					max: sixteen[3] 
 				} 
 			}, 
-			audio: true
+			audio: { echoCancellation: true, noiseSuppression: true} 
 		};
 		bitrate = sixteen[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(25%, auto))";
@@ -359,7 +359,7 @@ const plusOne2 = (id) => {
 					max: twentyfive[3] 
 				} 
 			}, 
-			audio: true
+			audio: { echoCancellation: true, noiseSuppression: true} 
 		}
 		bitrate = twentyfive[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(20%, auto))";
@@ -376,7 +376,7 @@ const minusOne = (id) => {
 				width:{min: two[0], ideal: two[0]}, 
 				height:{min: two[1], ideal: two[1]}
 			}, 
-			audio: true, 
+			audio: { echoCancellation: true, noiseSuppression: true} , 
 			frameRate: { 
 				ideal: 15, 
 				max: 15 
@@ -390,7 +390,7 @@ const minusOne = (id) => {
 				width:{min: four[0], ideal: four[0]}, 
 				height:{min: four[1], ideal: four[1]}
 			}, 
-			audio: true, 
+			audio: { echoCancellation: true, noiseSuppression: true} , 
 			frameRate: { 
 				ideal: 15, 
 				max: 15 
@@ -404,7 +404,7 @@ const minusOne = (id) => {
 				width:{min: nine[0], ideal: nine[0]}, 
 				height:{min: nine[1], ideal: nine[1]}
 			}, 
-			audio: true, 
+			audio: { echoCancellation: true, noiseSuppression: true} , 
 			frameRate: { 
 				ideal: 15, 
 				max: 15 
@@ -418,7 +418,7 @@ const minusOne = (id) => {
 				width:{min: sixteen[0], ideal: sixteen[0]}, 
 				height:{min: sixteen[1], ideal: sixteen[1]}
 			}, 
-			audio: true, 
+			audio: { echoCancellation: true, noiseSuppression: true} , 
 			frameRate: { 
 				ideal: 15, 
 				max: 15 
@@ -537,7 +537,7 @@ const createSDPAnswer = async data => {
 				request: "start",
 				room: 35610863,
 				video: true,
-				audio: true
+				audio: { echoCancellation: true, noiseSuppression: true} 
 				},
 				jsep: janusStreamPeers[tempId].localDescription
 			};
@@ -632,7 +632,7 @@ janus.createVideoRoom = (ws) => {
 			request: 'create',
 			room: 35610863,
 			publishers: 100,
-			audiocodec: 'opus'
+			audiocodec: 'g722'
 		}
 	};
 
@@ -694,7 +694,7 @@ janus.publish = (ws) => {
 		transaction: trxid,
 		body: {
 			request: 'publish ',
-			audio: true,
+			audio: { echoCancellation: true, noiseSuppression: true} ,
 			video: true,
 			// bitrate: bitrate
 		}
@@ -714,7 +714,7 @@ janus.createOffer = (ws,sdp) => {
 		body:{
 			request: 'publish',
 			video: true,
-			audio: true,
+			audio: { echoCancellation: true, noiseSuppression: true} ,
 			display: userId,
 			// bitrate
 		},
