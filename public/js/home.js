@@ -200,10 +200,14 @@ const getMessage = (message) => {
 				const audioStr = 'audio-level-dBov-av'
 				if(messageObj.plugindata.data && messageObj.plugindata.data.videoroom == 'talking'){
 					console.log("talking!!!!", messageObj.plugindata.data)
-					document.getElementById(feedIdToId[messageObj.plugindata.data.id]) && document.getElementById(feedIdToId[messageObj.plugindata.data.id]).style.border = "thick solid red";
+					if(document.getElementById(feedIdToId[messageObj.plugindata.data.id])){
+						document.getElementById(feedIdToId[messageObj.plugindata.data.id]).style.border = "thick solid red";
+					}
 				} else if(messageObj.plugindata.data && messageObj.plugindata.data.videoroom == 'stopped-talking'){
-					console.log("stop talking!!!!", messageObj.plugindata.data)
-					document.getElementById(feedIdToId[messageObj.plugindata.data.id]) && document.getElementById(feedIdToId[messageObj.plugindata.data.id]).style.border = "thick solid black";
+					console.log("stop talking!!!!", messageObj.plugindata.data);
+					if(document.getElementById(feedIdToId[messageObj.plugindata.data.id])){
+						document.getElementById(feedIdToId[messageObj.plugindata.data.id]).style.border = "thick solid black";
+					}
 
 				}
 				
