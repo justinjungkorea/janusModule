@@ -197,6 +197,15 @@ const getMessage = (message) => {
 
 					minusOne(tempId);
 				}
+				const audioStr = 'audio-level-dBov-av'
+				if(messageObj.plugindata.data && messageObj.plugindata.data.videoroom == 'talking'){
+					console.log("talking!!!!", messageObj.plugindata.data)
+					document.getElementById(feedIdToId[messageObj.plugindata.data.id]).style.border = "thick solid red";
+				} else if(messageObj.plugindata.data && messageObj.plugindata.data.videoroom == 'stopped-talking'){
+					console.log("stop talking!!!!", messageObj.plugindata.data)
+					document.getElementById(feedIdToId[messageObj.plugindata.data.id]).style.border = "thick solid black";
+
+				}
 				
 			}
 			break;
@@ -632,7 +641,8 @@ janus.createVideoRoom = (ws) => {
 			request: 'create',
 			room: 35610863,
 			publishers: 100,
-			audiolevel_event: true
+			audiolevel_event: true,
+			audio_level_average: 100
 		}
 	};
 

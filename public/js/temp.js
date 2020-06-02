@@ -19,10 +19,7 @@ window.onload = function() {
     // Attempt to get audio input
     try {
         // monkeypatch getUserMedia
-        navigator.getUserMedia = 
-        	navigator.getUserMedia ||
-        	navigator.webkitGetUserMedia ||
-        	navigator.mozGetUserMedia;
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
         // ask for an audio input
         navigator.getUserMedia(
@@ -68,11 +65,9 @@ function onLevelChange( time ) {
     // check if we're currently clipping
     if (meter.checkClipping()){
         canvasContext.fillStyle = "red";
-        document.getElementById('speaking').innerText = "speaking";
     }
     else{
         canvasContext.fillStyle = "green";
-        document.getElementById('speaking').innerText = "not speaking";
     }
 
 
