@@ -5,8 +5,9 @@ const videoBox = document.getElementById("videoBox");
 const subscribeFlag = document.getElementById('subscribeFlag');
 
 // var janusUrl = 'ws://106.240.247.43:8188';
-var janusUrl = 'ws://106.240.247.43:3561';
-// var janusUrl = 'ws://13.209.65.193:7011';
+// var janusUrl = 'ws://106.240.247.43:3561';
+// var janusUrl = 'ws://15.165.32.44:7011';
+var janusUrl = 'ws://13.124.88.25:7011';
 // var janusUrl = 'ws://13.209.65.193:8188';
 // var janusSecret = '19dc9bf617df828f1da469c843c93d327ac36bf1';
 var session_id;
@@ -114,18 +115,18 @@ const getMessage = (message) => {
 						if(userId == 'a1'){
 							janus.destroyRoom(ws);
 						} else {
-							janus.joinVideoRoom(ws,35610863)
+							janus.joinVideoRoom(ws,"35610863")
 						}
 						break;
 					case 'attachSubscriber':
 						let tempId = subscriberTransaction[messageObj.transaction];
 						subscriber_ids[tempId] = messageObj.data.id;
 						setTimeout(()=>{
-							janus.joinSubscriber(ws, 35610863, tempId, subscriberFeedId[tempId]);
+							janus.joinSubscriber(ws, "35610863", tempId, subscriberFeedId[tempId]);
 						}, 3000);
 						break;
 					case 'createVideoRoom':
-						janus.joinVideoRoom(ws,35610863)
+						janus.joinVideoRoom(ws,"35610863")
 						break;
 					case 'joinVideoRoom':
 						break;
@@ -549,7 +550,7 @@ const createSDPAnswer = async data => {
 				session_id: session_id,
 				body: {
 				request: "start",
-				room: 35610863,
+				room: "35610863",
 				video: true,
 				audio: true, 
 				},
@@ -644,11 +645,11 @@ janus.createVideoRoom = (ws) => {
 		transaction: trxid,
 		body : {
 			request: 'create',
-			room: 35610863,
+			room: "35610863",
 			publishers: 100,
 			audiolevel_event: true,
 			audio_level_average: 70,
-			record: true,
+			record: false,
 			rec_dir: '/opt/justin/share/janus/recordings/'
 		}
 	};
@@ -670,7 +671,7 @@ janus.joinVideoRoom = (ws, roomId) => {
 		body: {
 			request: 'join',
 			ptype: 'publisher',
-			room: parseInt(roomId),
+			room: roomId,
 			display: "test"
 		}
 	}
@@ -690,7 +691,7 @@ janus.joinSubscriber = (ws, roomId, displayId, feedId) => {
     body: {
       request: "join",
       ptype: "subscriber",
-      room: parseInt(roomId),
+      room: roomId,
 	  display: "test",
 	  close_pc: false,
       feed: feedId
@@ -788,7 +789,7 @@ janus.destroyRoom = (ws) => {
 		transaction: trxid,
 		body : {
 			request: 'destroy',
-			room: 35610863
+			room: "35610863"
 		}
 	};
 
@@ -805,7 +806,7 @@ janus.editRoom = (ws, bit) => {
 		transaction: trxid,
 		body : {
 			request: 'edit',
-			room: 35610863,
+			room: "35610863",
 			new_bitrate: bit
 		}
 	};
