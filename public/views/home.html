@@ -31,53 +31,53 @@
             grid-template-columns: repeat(auto-fill, minmax(100%, auto));
         }
         #videoBox video {
-            width: 100%; 
+            width: 100%;
         }
         .multi-video {
             border: 1px solid black;
             margin: 2px;
         }
-        input[type=checkbox] {  
-            display: none;  
+        input[type=checkbox] {
+            display: none;
         }
 
         input[type=checkbox] + label{
-            display: inline-block;  
-            cursor: pointer;  
-            position: relative;  
-            padding-left: 25px;  
-            margin-right: 15px;  
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            padding-left: 25px;
+            margin-right: 15px;
             font-size: 13px;
         }
 
-        input[type=checkbox]+ label:before {     
+        input[type=checkbox]+ label:before {
 
-            content: "";  
-            display: inline-block;  
-        
-            width: 20px;  
-            height: 20px;  
-        
-            margin-right: 10px;  
-            position: absolute;  
-            left: 0;  
-            bottom: 1px;  
-            background-color: #ccc;  
-            border-radius: 2px; 
-            box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);  
+            content: "";
+            display: inline-block;
+
+            width: 20px;
+            height: 20px;
+
+            margin-right: 10px;
+            position: absolute;
+            left: 0;
+            bottom: 1px;
+            background-color: #ccc;
+            border-radius: 2px;
+            box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
         }
-        input[type=checkbox]:checked + label:before { 
+        input[type=checkbox]:checked + label:before {
 
             content: "\2713";  /* 체크모양 */
-            text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  
-            font-size: 18px; 
-            font-weight:800; 
-            color: #fff;  
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+            font-size: 18px;
+            font-weight:800;
+            color: #fff;
             background:#2f87c1;
-            text-align: center;  
-            line-height: 18px;  
+            text-align: center;
+            line-height: 18px;
 
-        } 
+        }
     </style>
 </head>
     <body>
@@ -114,14 +114,20 @@
                 <li><button class="userBtn" value="a27">a27</button></li>
                 <li><button class="userBtn" value="a28">a28</button></li>
                 <li><button class="userBtn" value="a29">a29</button></li>
+                <li><button class="userBtn" value="a29">a30</button></li>
+                <li><button class="userBtn" value="a29">a31</button></li>
+                <li><button class="userBtn" value="a29">a32</button></li>
+                <li><button class="userBtn" value="a29">a33</button></li>
             </ul>
-        </div>   
+        </div>
         <canvas id="meter" width="500" height="50"></canvas>
+        <button id="videoBtn">Video</button>
+        <button id="audioBtn">Audio</button>
         <div id="videoBox"></div>
         <div id="printBox"></div>
     </body>
-    <script type="text/javascript" src="../js/volume-meter.js"></script>
-    <script type="text/javascript" src="../js/temp.js"></script>
-    <script type="text/javascript" src="../js/getStats.js"></script>
+<!--    <script type="text/javascript" src="../js/volume-meter.js"></script>-->
+<!--    <script type="text/javascript" src="../js/temp.js"></script>-->
+<!--    <script type="text/javascript" src="../js/getStats.js"></script>-->
     <script type="text/javascript" src="../js/home.js"></script>
 </html>

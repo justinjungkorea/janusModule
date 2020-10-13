@@ -4,10 +4,13 @@ const videoFlag = document.getElementById("videoFlag");
 const videoBox = document.getElementById("videoBox");
 const subscribeFlag = document.getElementById('subscribeFlag');
 
+const videoBtn = document.getElementById('videoBtn');
+const audioBtn = document.getElementById('audioBtn');
+
 // var janusUrl = 'ws://106.240.247.43:8188';
-// var janusUrl = 'ws://106.240.247.43:3561';
+var janusUrl = 'ws://106.240.247.43:9500';
 // var janusUrl = 'ws://15.165.32.44:7011';
-var janusUrl = 'ws://13.124.88.25:7011';
+// var janusUrl = 'ws://15.165.44.98:7011';
 // var janusUrl = 'ws://13.209.65.193:8188';
 // var janusSecret = '19dc9bf617df828f1da469c843c93d327ac36bf1';
 var session_id;
@@ -24,7 +27,7 @@ let feedId;
 let userId;
 let people = {};
 
-let two = [1280, 720, 1382000, 30];
+let two = [240, 135, 1382000, 15];
 let four = [960, 540, 518000, 15];
 let nine = [640, 360, 230000, 15];
 let sixteen = [480, 270, 129000, 15];
@@ -32,14 +35,14 @@ let twentyfive = [240, 135, 64000, 15];
 
 let mediaConstraint = {
     video: {
-        width:{min: two[0], ideal: two[0]}, 
-        height:{min: two[1], ideal: two[1]}, 
-		frameRate: { 
-			ideal: two[3], 
-			max: two[3] 
-		} 
-    }, 
-    audio: true, 
+        width:{min: two[0], ideal: two[0]},
+        height:{min: two[1], ideal: two[1]},
+		frameRate: {
+			ideal: two[3],
+			max: two[3]
+		}
+    },
+    audio: true,
 };
 
 let bitrate = two[2];
@@ -47,6 +50,9 @@ let bitrate = two[2];
 var ws = new WebSocket(janusUrl, 'janus-protocol');
 
 const janus = {};
+
+let videoOnOff = true;
+let audioOnOff = false;
 
 //session이 create 한 후 매 45초 마다 실행
 setInterval(() => {
@@ -76,7 +82,7 @@ ws.onclose = () => {
 
 ///////// 기타 method /////////
 
-//로그 출력 
+//로그 출력
 const socketLog = (type, contents) => {
 	let contentsJson = JSON.stringify(contents);
 	let textLine = document.createElement("p");
@@ -144,7 +150,7 @@ const getMessage = (message) => {
 				if(messageObj.plugindata.data.videoroom == 'joined'){
 					feedId = messageObj.plugindata.data.id;
 					let publishers = messageObj.plugindata.data.publishers;
-					
+
 					publishers.forEach(element => {
 						subscriberFeedId[element.display] = element.id;
 						feedIdToId[element.id] = element.display;
@@ -155,7 +161,7 @@ const getMessage = (message) => {
 						}
 						// createVideoBox(element.display);
 						// createSDPAnswer(element.display);
-						
+
 					})
 					createVideoBox(userId);
 					createSDPOffer(userId);
@@ -167,7 +173,7 @@ const getMessage = (message) => {
 
 					}
 				}
-				
+
 				if(messageObj.jsep && messageObj.jsep.type === 'offer'){
 					createVideoBox(messageObj.plugindata.data.display);
 					createSDPAnswer(messageObj);
@@ -176,14 +182,14 @@ const getMessage = (message) => {
 				if(messageObj.plugindata.data.videoroom != 'joined' && messageObj.plugindata.data.publishers && messageObj.plugindata.data.publishers.length > 0){
 					subscriberFeedId[messageObj.plugindata.data.publishers[0].display] = messageObj.plugindata.data.publishers[0].id;
 					feedIdToId[messageObj.plugindata.data.publishers[0].id] = messageObj.plugindata.data.publishers[0].display;
-					
+
 					if(subscribeFlag.checked){
 						janus.attachPlugin(ws, messageObj.plugindata.data.publishers[0].display, session_id, 'janus.plugin.videoroom', false );
 					} else {
 						plusOne2(messageObj.plugindata.data.publishers[0].id);
 					}
 				}
-				
+
 				if(messageObj.plugindata.data.leaving){
 					let tempId = feedIdToId[messageObj.plugindata.data.leaving];
 					document.getElementById(`${tempId}`).remove();
@@ -212,7 +218,7 @@ const getMessage = (message) => {
 					}
 
 				}
-				
+
 			}
 			break;
 		default:
@@ -226,14 +232,14 @@ const plusOne = (id) => {
 	if(nop == 2){
 		mediaConstraint = {
 			video: {
-				width:{min: two[0], ideal: two[0]}, 
-				height:{min: two[1], ideal: two[1]}, 
-				frameRate: { 
-					ideal: two[3], 
-					max: two[3] 
-				} 
-			}, 
-			audio: true, 
+				width:{min: two[0], ideal: two[0]},
+				height:{min: two[1], ideal: two[1]},
+				frameRate: {
+					ideal: two[3],
+					max: two[3]
+				}
+			},
+			audio: true,
 		};
 		bitrate = two[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
@@ -241,14 +247,14 @@ const plusOne = (id) => {
 	} else if(nop == 3){
 		mediaConstraint = {
 			video: {
-				width:{min: four[0], ideal: four[0]}, 
-				height:{min: four[1], ideal: four[1]}, 
-				frameRate: { 
-					ideal: four[3], 
-					max: four[3] 
-				} 
-			}, 
-			audio: true, 
+				width:{min: four[0], ideal: four[0]},
+				height:{min: four[1], ideal: four[1]},
+				frameRate: {
+					ideal: four[3],
+					max: four[3]
+				}
+			},
+			audio: true,
 		};
 		bitrate = four[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
@@ -256,14 +262,14 @@ const plusOne = (id) => {
 	} else if (nop == 5) {
 		mediaConstraint = {
 			video: {
-				width:{min: nine[0], ideal: nine[0]}, 
-				height:{min: nine[1], ideal: nine[1]}, 
-				frameRate: { 
-					ideal: nine[3], 
-					max: nine[3] 
-				} 
-			}, 
-			audio: true, 
+				width:{min: nine[0], ideal: nine[0]},
+				height:{min: nine[1], ideal: nine[1]},
+				frameRate: {
+					ideal: nine[3],
+					max: nine[3]
+				}
+			},
+			audio: true,
 		}
 		bitrate = nine[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(30%, auto))";
@@ -271,14 +277,14 @@ const plusOne = (id) => {
 	} else if (nop == 10) {
 		mediaConstraint = {
 			video: {
-				width:{min: sixteen[0], ideal: sixteen[0]}, 
+				width:{min: sixteen[0], ideal: sixteen[0]},
 				height:{min: sixteen[1], ideal: sixteen[1]},
-				frameRate: { 
-					ideal: sixteen[3], 
-					max: sixteen[3] 
-				} 
-			}, 
-			audio: true, 
+				frameRate: {
+					ideal: sixteen[3],
+					max: sixteen[3]
+				}
+			},
+			audio: true,
 		};
 		bitrate = sixteen[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(25%, auto))";
@@ -286,19 +292,19 @@ const plusOne = (id) => {
 	} else if (nop == 17) {
 		mediaConstraint = {
 			video: {
-				width:{min: twentyfive[0], ideal: twentyfive[0]}, 
+				width:{min: twentyfive[0], ideal: twentyfive[0]},
 				height:{min: twentyfive[1], ideal: twentyfive[1]}
-			}, 
-			audio: true, 
-			frameRate: { 
-				ideal: twentyfive[3], 
+			},
+			audio: true,
+			frameRate: {
+				ideal: twentyfive[3],
 				max: twentyfive [3]
-			} 
+			}
 		}
 		bitrate = twentyfive[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(20%, auto))";
 		changeConfig();
-	} 
+	}
 }
 
 const plusOne2 = (id) => {
@@ -307,14 +313,14 @@ const plusOne2 = (id) => {
 	if(nop <= 2){
 		mediaConstraint = {
 			video: {
-				width:{min: two[0], ideal: two[0]}, 
-				height:{min: two[1], ideal: two[1]}, 
-				frameRate: { 
-					ideal: two[3], 
-					max: two[3] 
-				} 
-			}, 
-			audio: true, 
+				width:{min: two[0], ideal: two[0]},
+				height:{min: two[1], ideal: two[1]},
+				frameRate: {
+					ideal: two[3],
+					max: two[3]
+				}
+			},
+			audio: true,
 		};
 		bitrate = two[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
@@ -322,14 +328,14 @@ const plusOne2 = (id) => {
 	} else if(nop <= 4){
 		mediaConstraint = {
 			video: {
-				width:{min: four[0], ideal: four[0]}, 
-				height:{min: four[1], ideal: four[1]}, 
-				frameRate: { 
-					ideal: four[3], 
-					max: four[3] 
-				} 
-			}, 
-			audio: true, 
+				width:{min: four[0], ideal: four[0]},
+				height:{min: four[1], ideal: four[1]},
+				frameRate: {
+					ideal: four[3],
+					max: four[3]
+				}
+			},
+			audio: true,
 		};
 		bitrate = four[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
@@ -337,14 +343,14 @@ const plusOne2 = (id) => {
 	} else if (nop <= 9) {
 		mediaConstraint = {
 			video: {
-				width:{min: nine[0], ideal: nine[0]}, 
-				height:{min: nine[1], ideal: nine[1]}, 
-				frameRate: { 
-					ideal: nine[3], 
-					max: nine[3] 
-				} 
-			}, 
-			audio: true, 
+				width:{min: nine[0], ideal: nine[0]},
+				height:{min: nine[1], ideal: nine[1]},
+				frameRate: {
+					ideal: nine[3],
+					max: nine[3]
+				}
+			},
+			audio: true,
 		}
 		bitrate = nine[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(30%, auto))";
@@ -352,14 +358,14 @@ const plusOne2 = (id) => {
 	} else if (nop <= 16) {
 		mediaConstraint = {
 			video: {
-				width:{min: sixteen[0], ideal: sixteen[0]}, 
-				height:{min: sixteen[1], ideal: sixteen[1]}, 
-				frameRate: { 
-					ideal: sixteen[3], 
-					max: sixteen[3] 
-				} 
-			}, 
-			audio: true, 
+				width:{min: sixteen[0], ideal: sixteen[0]},
+				height:{min: sixteen[1], ideal: sixteen[1]},
+				frameRate: {
+					ideal: sixteen[3],
+					max: sixteen[3]
+				}
+			},
+			audio: true,
 		};
 		bitrate = sixteen[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(25%, auto))";
@@ -367,19 +373,54 @@ const plusOne2 = (id) => {
 	} else if (nop <= 25) {
 		mediaConstraint = {
 			video: {
-				width:{min: twentyfive[0], ideal: twentyfive[0]}, 
-				height:{min: twentyfive[1], ideal: twentyfive[1]}, 
-				frameRate: { 
-					ideal: twentyfive[3], 
-					max: twentyfive[3] 
-				} 
-			}, 
-			audio: true, 
+				width:{min: twentyfive[0], ideal: twentyfive[0]},
+				height:{min: twentyfive[1], ideal: twentyfive[1]},
+				frameRate: {
+					ideal: twentyfive[3],
+					max: twentyfive[3]
+				}
+			},
+			audio: true,
 		}
 		bitrate = twentyfive[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(20%, auto))";
 		changeConfig();
-	} 
+	}
+}
+
+const resolutionOne = () => {
+
+	mediaConstraint = {
+		video: {
+			width:{min: 160, ideal: 160},
+			height:{min: 120, ideal: 120},
+			frameRate: {
+				ideal: 10,
+				max: 10
+			}
+		},
+		audio: true,
+	};
+
+	changeConfig();
+}
+
+const resolutionTwo = () => {
+
+	mediaConstraint = {
+		video: {
+			width:{min: 160, ideal: 160},
+			height:{min: 120, ideal: 120},
+			frameRate: {
+				ideal: 10,
+				max: 10
+			}
+		},
+		audio: true,
+	};
+	bitrate = two[2];
+	document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(20%, auto))";
+	changeConfig();
 }
 
 const minusOne = (id) => {
@@ -388,60 +429,60 @@ const minusOne = (id) => {
 	if(nop == 2){
 		mediaConstraint = {
 			video: {
-				width:{min: two[0], ideal: two[0]}, 
+				width:{min: two[0], ideal: two[0]},
 				height:{min: two[1], ideal: two[1]}
-			}, 
-			audio: true, 
-			frameRate: { 
-				ideal: 15, 
-				max: 15 
-			} 
+			},
+			audio: true,
+			frameRate: {
+				ideal: 15,
+				max: 15
+			}
 		};
 		bitrate = two[2];
 		changeConfig();
 	} else if (nop == 4) {
 		mediaConstraint = {
 			video: {
-				width:{min: four[0], ideal: four[0]}, 
+				width:{min: four[0], ideal: four[0]},
 				height:{min: four[1], ideal: four[1]}
-			}, 
-			audio: true, 
-			frameRate: { 
-				ideal: 15, 
-				max: 15 
-			} 
+			},
+			audio: true,
+			frameRate: {
+				ideal: 15,
+				max: 15
+			}
 		}
 		bitrate = four[2];
 		changeConfig();
 	} else if (nop == 9) {
 		mediaConstraint = {
 			video: {
-				width:{min: nine[0], ideal: nine[0]}, 
+				width:{min: nine[0], ideal: nine[0]},
 				height:{min: nine[1], ideal: nine[1]}
-			}, 
-			audio: true, 
-			frameRate: { 
-				ideal: 15, 
-				max: 15 
-			} 
+			},
+			audio: true,
+			frameRate: {
+				ideal: 15,
+				max: 15
+			}
 		};
 		bitrate = nine[2];
 		changeConfig();
 	} else if (nop == 16) {
 		mediaConstraint = {
 			video: {
-				width:{min: sixteen[0], ideal: sixteen[0]}, 
+				width:{min: sixteen[0], ideal: sixteen[0]},
 				height:{min: sixteen[1], ideal: sixteen[1]}
-			}, 
-			audio: true, 
-			frameRate: { 
-				ideal: 15, 
-				max: 15 
-			} 
+			},
+			audio: true,
+			frameRate: {
+				ideal: 15,
+				max: 15
+			}
 		}
 		bitrate = sixteen[2];
 		changeConfig();
-	} 
+	}
 }
 const createVideoBox = userId => {
     let videoContainner = document.createElement("div");
@@ -451,15 +492,15 @@ const createVideoBox = userId => {
     let videoLabel = document.createElement("p");
     let videoLabelText = document.createTextNode(userId);
     videoLabel.appendChild(videoLabelText);
-    
+
     let videoResolution = document.createElement("p");
     videoResolution.id = `resolutions-${userId}`;
     videoResolution.innerText = 0;
-    
+
     let videoBitrate = document.createElement("p");
     videoBitrate.id = `bitrate-${userId}`;
     videoBitrate.innerText = 0;
-    
+
     videoContainner.appendChild(videoLabel);
     videoContainner.appendChild(videoResolution);
     videoContainner.appendChild(videoBitrate);
@@ -470,33 +511,33 @@ const createVideoBox = userId => {
     videoContainner.appendChild(multiVideo);
 
 	videoBox.appendChild(videoContainner);
-	
+
 	plusOne(userId);
-	
+
 }
 
 const createSDPOffer = async userId => {
 	janusStreams[userId] = await navigator.mediaDevices.getUserMedia(mediaConstraint);
-	
+
 	if(videoFlag.checked){
 		let str = 'multiVideo-'+userId;
 		let multiVideo = document.getElementById(str);
 		multiVideo.srcObject = janusStreams[userId];
 		multiVideo.muted = true
 	}
-	
+
 	janusStreamPeers[userId] = new RTCPeerConnection();
 	janusStreams[userId].getTracks().forEach(track => {
 		janusStreamPeers[userId].addTrack(track, janusStreams[userId]);
 
-		var cnt = 1;
-		var previoutData = 0;
-        getStats(janusStreamPeers[userId], result => {
-            if(result){
-                document.getElementById(`bitrate-${userId}`).innerText = result.audio.bytesSent*8 - previoutData;
-                document.getElementById(`resolutions-${userId}`).innerText = result.resolutions.send.width+"*"+result.resolutions.send.height;;				previoutData = result.audio.bytesSent*8;
-            }
-        }, 1000);
+		// var cnt = 1;
+		// var previoutData = 0;
+        // getStats(janusStreamPeers[userId], result => {
+        //     if(result){
+        //         document.getElementById(`bitrate-${userId}`).innerText = result.audio.bytesSent*8 - previoutData;
+        //         document.getElementById(`resolutions-${userId}`).innerText = result.resolutions.send.width+"*"+result.resolutions.send.height;;				previoutData = result.audio.bytesSent*8;
+        //     }
+        // }, 1000);
 	});
 
 	janusStreamPeers[userId].createOffer().then(sdp => {
@@ -515,7 +556,7 @@ const createSDPAnswer = async data => {
 	janusStreamPeers[tempId] = new RTCPeerConnection();
 	janusStreamPeers[tempId].ontrack = e => {
 		janusStreams[tempId] = e.streams[0];
-		
+
 		if(videoFlag.checked){
 			let multiVideo = document.querySelector("#multiVideo-" + tempId);
 			multiVideo.srcObject = janusStreams[tempId];
@@ -523,23 +564,23 @@ const createSDPAnswer = async data => {
 
 		var cnt = 1;
 		var previousData = 0;
-        getStats(janusStreamPeers[tempId], result => {
-			if(result.audio.bytesReceived !== 0){
-                if(document.getElementById(`bitrate-${tempId}`) && document.getElementById(`resolutions-${tempId}`)){
-                    // document.getElementById(`bitrate-${tempId}`).innerText = Math.ceil(result.video.bytesReceived*8 / cnt);
-                    document.getElementById(`bitrate-${tempId}`).innerText = result.audio.bytesReceived*8 - previousData;
-					document.getElementById(`resolutions-${tempId}`).innerText = result.resolutions.recv.width+"*"+result.resolutions.recv.height;
-					previousData = result.audio.bytesReceived*8;
-                }
-                cnt++;
-              }
-        }, 1000);
+        // getStats(janusStreamPeers[tempId], result => {
+		// 	if(result.audio.bytesReceived !== 0){
+        //         if(document.getElementById(`bitrate-${tempId}`) && document.getElementById(`resolutions-${tempId}`)){
+        //             // document.getElementById(`bitrate-${tempId}`).innerText = Math.ceil(result.video.bytesReceived*8 / cnt);
+        //             document.getElementById(`bitrate-${tempId}`).innerText = result.audio.bytesReceived*8 - previousData;
+		// 			document.getElementById(`resolutions-${tempId}`).innerText = result.resolutions.recv.width+"*"+result.resolutions.recv.height;
+		// 			previousData = result.audio.bytesReceived*8;
+        //         }
+        //         cnt++;
+        //       }
+        // }, 1000);
 	}
 
 	await janusStreamPeers[tempId].setRemoteDescription(data.jsep);
 	let answerSdp = await janusStreamPeers[tempId].createAnswer();
 	await janusStreamPeers[tempId].setLocalDescription(answerSdp);
-	
+
 	janusStreamPeers[tempId].onicecandidate = e => {
 		if(!e.candidate){
 			let trxid = getTrxID();
@@ -552,7 +593,7 @@ const createSDPAnswer = async data => {
 				request: "start",
 				room: "35610863",
 				video: true,
-				audio: true, 
+				audio: true,
 				},
 				jsep: janusStreamPeers[tempId].localDescription
 			};
@@ -675,7 +716,7 @@ janus.joinVideoRoom = (ws, roomId) => {
 			display: "test"
 		}
 	}
-	
+
 	socketLog('send', msg);
 	ws.send(JSON.stringify(msg));
 }
@@ -697,7 +738,7 @@ janus.joinSubscriber = (ws, roomId, displayId, feedId) => {
       feed: feedId
     }
   };
-	
+
 	socketLog('send', msg);
 	ws.send(JSON.stringify(msg));
 }
@@ -740,7 +781,7 @@ janus.createOffer = (ws,sdp) => {
 			type: sdp.type,
 			sdp: sdp.sdp
 		}
-	} 
+	}
 
 	socketLog('send', msg);
 	ws.send(JSON.stringify(msg));
@@ -752,7 +793,7 @@ janus.sendKeepAlive = (ws) => {
 		janus: 'keepalive',
 		session_id : session_id,
 		transaction: trxid
-	} 
+	}
 	// console.log(msg);
 	ws.send(JSON.stringify(msg));
 
@@ -820,7 +861,50 @@ for(i=0;i<userBtns.length;++i){
     const temp = userBtns[i].value;
     userBtns[i].addEventListener('click', () => {
 		userId = temp;
+		console.log("check", userId)
 		janus.createSession(ws);
 		document.getElementById('user').style.display = 'none'
     })
 }
+
+videoBtn.addEventListener('click', () => {
+	if(!videoOnOff){
+		// navigator.mediaDevices.getUserMedia(mediaConstraint).then(stream => {
+		// 	let videoTrack = stream.getVideoTracks()[0];
+		// 	var sender = janusStreamPeers[userId].getSenders().find(s => {
+		// 		return s.track.kind == videoTrack.kind;
+		// 	});
+		// 	sender.replaceTrack(videoTrack);
+		// 	janusStreams[userId] = stream;
+		// }).catch(err => {
+		// 	console.log('Error ::: ', err);
+		// });
+	}
+
+	else {
+		videoOnOff = false;
+		console.log("video off!", userId)
+		navigator.mediaDevices.getUserMedia({video: videoOnOff, audio: true}).then(stream => {
+			const sender = janusStreamPeers[userId].getSenders();
+			sender.forEach(sender => {
+				janusStreamPeers[userId].removeTrack(sender)
+			})
+
+			janusStreams[userId] = stream;
+
+			let str = 'multiVideo-'+userId;
+			let multiVideo = document.getElementById(str);
+			multiVideo.srcObject = janusStreams[userId];
+			multiVideo.muted = true
+
+		}).catch(err => {
+			console.log('Error ::: ', err);
+		});
+	}
+
+
+})
+
+audioBtn.addEventListener('click', () => {
+
+})
