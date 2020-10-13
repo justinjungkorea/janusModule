@@ -6,6 +6,9 @@ const subscribeFlag = document.getElementById('subscribeFlag');
 
 const videoBtn = document.getElementById('videoBtn');
 const audioBtn = document.getElementById('audioBtn');
+const blurBtn = document.getElementById('blurBtn');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
 
 // var janusUrl = 'ws://106.240.247.43:8188';
 var janusUrl = 'ws://106.240.247.43:9500';
@@ -121,18 +124,18 @@ const getMessage = (message) => {
 						if(userId == 'a1'){
 							janus.destroyRoom(ws);
 						} else {
-							janus.joinVideoRoom(ws,"35610863")
+							janus.joinVideoRoom(ws,"76052757")
 						}
 						break;
 					case 'attachSubscriber':
 						let tempId = subscriberTransaction[messageObj.transaction];
 						subscriber_ids[tempId] = messageObj.data.id;
 						setTimeout(()=>{
-							janus.joinSubscriber(ws, "35610863", tempId, subscriberFeedId[tempId]);
+							janus.joinSubscriber(ws, "76052757", tempId, subscriberFeedId[tempId]);
 						}, 3000);
 						break;
 					case 'createVideoRoom':
-						janus.joinVideoRoom(ws,"35610863")
+						janus.joinVideoRoom(ws,"76052757")
 						break;
 					case 'joinVideoRoom':
 						break;
@@ -221,6 +224,16 @@ const getMessage = (message) => {
 
 			}
 			break;
+
+		case 'slowlink':
+			{
+				// if(!messageObj.uplink){
+				// 	videoOnOff = false;
+				// 	videoHandling(videoOnOff);
+				// }
+			}
+			break;
+
 		default:
 			break;
 	}
@@ -230,78 +243,78 @@ const plusOne = (id) => {
 	people[id] = true;
 	let nop = Object.keys(people).length;
 	if(nop == 2){
-		mediaConstraint = {
-			video: {
-				width:{min: two[0], ideal: two[0]},
-				height:{min: two[1], ideal: two[1]},
-				frameRate: {
-					ideal: two[3],
-					max: two[3]
-				}
-			},
-			audio: true,
-		};
-		bitrate = two[2];
+		// mediaConstraint = {
+		// 	video: {
+		// 		width:{min: two[0], ideal: two[0]},
+		// 		height:{min: two[1], ideal: two[1]},
+		// 		frameRate: {
+		// 			ideal: two[3],
+		// 			max: two[3]
+		// 		}
+		// 	},
+		// 	audio: true,
+		// };
+		// bitrate = two[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
 		changeConfig();
 	} else if(nop == 3){
-		mediaConstraint = {
-			video: {
-				width:{min: four[0], ideal: four[0]},
-				height:{min: four[1], ideal: four[1]},
-				frameRate: {
-					ideal: four[3],
-					max: four[3]
-				}
-			},
-			audio: true,
-		};
-		bitrate = four[2];
+		// mediaConstraint = {
+		// 	video: {
+		// 		width:{min: four[0], ideal: four[0]},
+		// 		height:{min: four[1], ideal: four[1]},
+		// 		frameRate: {
+		// 			ideal: four[3],
+		// 			max: four[3]
+		// 		}
+		// 	},
+		// 	audio: true,
+		// };
+		// bitrate = four[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
 		changeConfig();
 	} else if (nop == 5) {
-		mediaConstraint = {
-			video: {
-				width:{min: nine[0], ideal: nine[0]},
-				height:{min: nine[1], ideal: nine[1]},
-				frameRate: {
-					ideal: nine[3],
-					max: nine[3]
-				}
-			},
-			audio: true,
-		}
-		bitrate = nine[2];
+		// mediaConstraint = {
+		// 	video: {
+		// 		width:{min: nine[0], ideal: nine[0]},
+		// 		height:{min: nine[1], ideal: nine[1]},
+		// 		frameRate: {
+		// 			ideal: nine[3],
+		// 			max: nine[3]
+		// 		}
+		// 	},
+		// 	audio: true,
+		// }
+		// bitrate = nine[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(30%, auto))";
 		changeConfig();
 	} else if (nop == 10) {
-		mediaConstraint = {
-			video: {
-				width:{min: sixteen[0], ideal: sixteen[0]},
-				height:{min: sixteen[1], ideal: sixteen[1]},
-				frameRate: {
-					ideal: sixteen[3],
-					max: sixteen[3]
-				}
-			},
-			audio: true,
-		};
-		bitrate = sixteen[2];
+		// mediaConstraint = {
+		// 	video: {
+		// 		width:{min: sixteen[0], ideal: sixteen[0]},
+		// 		height:{min: sixteen[1], ideal: sixteen[1]},
+		// 		frameRate: {
+		// 			ideal: sixteen[3],
+		// 			max: sixteen[3]
+		// 		}
+		// 	},
+		// 	audio: true,
+		// };
+		// bitrate = sixteen[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(25%, auto))";
 		changeConfig();
 	} else if (nop == 17) {
-		mediaConstraint = {
-			video: {
-				width:{min: twentyfive[0], ideal: twentyfive[0]},
-				height:{min: twentyfive[1], ideal: twentyfive[1]}
-			},
-			audio: true,
-			frameRate: {
-				ideal: twentyfive[3],
-				max: twentyfive [3]
-			}
-		}
-		bitrate = twentyfive[2];
+		// mediaConstraint = {
+		// 	video: {
+		// 		width:{min: twentyfive[0], ideal: twentyfive[0]},
+		// 		height:{min: twentyfive[1], ideal: twentyfive[1]}
+		// 	},
+		// 	audio: true,
+		// 	frameRate: {
+		// 		ideal: twentyfive[3],
+		// 		max: twentyfive [3]
+		// 	}
+		// }
+		// bitrate = twentyfive[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(20%, auto))";
 		changeConfig();
 	}
@@ -311,78 +324,78 @@ const plusOne2 = (id) => {
 	people[id] = true;
 	let nop = Object.keys(people).length;
 	if(nop <= 2){
-		mediaConstraint = {
-			video: {
-				width:{min: two[0], ideal: two[0]},
-				height:{min: two[1], ideal: two[1]},
-				frameRate: {
-					ideal: two[3],
-					max: two[3]
-				}
-			},
-			audio: true,
-		};
-		bitrate = two[2];
+		// mediaConstraint = {
+		// 	video: {
+		// 		width:{min: two[0], ideal: two[0]},
+		// 		height:{min: two[1], ideal: two[1]},
+		// 		frameRate: {
+		// 			ideal: two[3],
+		// 			max: two[3]
+		// 		}
+		// 	},
+		// 	audio: true,
+		// };
+		// bitrate = two[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
 		changeConfig();
 	} else if(nop <= 4){
-		mediaConstraint = {
-			video: {
-				width:{min: four[0], ideal: four[0]},
-				height:{min: four[1], ideal: four[1]},
-				frameRate: {
-					ideal: four[3],
-					max: four[3]
-				}
-			},
-			audio: true,
-		};
-		bitrate = four[2];
+		// mediaConstraint = {
+		// 	video: {
+		// 		width:{min: four[0], ideal: four[0]},
+		// 		height:{min: four[1], ideal: four[1]},
+		// 		frameRate: {
+		// 			ideal: four[3],
+		// 			max: four[3]
+		// 		}
+		// 	},
+		// 	audio: true,
+		// };
+		// bitrate = four[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(50%, auto))";
 		changeConfig();
 	} else if (nop <= 9) {
-		mediaConstraint = {
-			video: {
-				width:{min: nine[0], ideal: nine[0]},
-				height:{min: nine[1], ideal: nine[1]},
-				frameRate: {
-					ideal: nine[3],
-					max: nine[3]
-				}
-			},
-			audio: true,
-		}
-		bitrate = nine[2];
+		// mediaConstraint = {
+		// 	video: {
+		// 		width:{min: nine[0], ideal: nine[0]},
+		// 		height:{min: nine[1], ideal: nine[1]},
+		// 		frameRate: {
+		// 			ideal: nine[3],
+		// 			max: nine[3]
+		// 		}
+		// 	},
+		// 	audio: true,
+		// }
+		// bitrate = nine[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(30%, auto))";
 		changeConfig();
 	} else if (nop <= 16) {
-		mediaConstraint = {
-			video: {
-				width:{min: sixteen[0], ideal: sixteen[0]},
-				height:{min: sixteen[1], ideal: sixteen[1]},
-				frameRate: {
-					ideal: sixteen[3],
-					max: sixteen[3]
-				}
-			},
-			audio: true,
-		};
-		bitrate = sixteen[2];
+		// mediaConstraint = {
+		// 	video: {
+		// 		width:{min: sixteen[0], ideal: sixteen[0]},
+		// 		height:{min: sixteen[1], ideal: sixteen[1]},
+		// 		frameRate: {
+		// 			ideal: sixteen[3],
+		// 			max: sixteen[3]
+		// 		}
+		// 	},
+		// 	audio: true,
+		// };
+		// bitrate = sixteen[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(25%, auto))";
 		changeConfig();
 	} else if (nop <= 25) {
-		mediaConstraint = {
-			video: {
-				width:{min: twentyfive[0], ideal: twentyfive[0]},
-				height:{min: twentyfive[1], ideal: twentyfive[1]},
-				frameRate: {
-					ideal: twentyfive[3],
-					max: twentyfive[3]
-				}
-			},
-			audio: true,
-		}
-		bitrate = twentyfive[2];
+		// mediaConstraint = {
+		// 	video: {
+		// 		width:{min: twentyfive[0], ideal: twentyfive[0]},
+		// 		height:{min: twentyfive[1], ideal: twentyfive[1]},
+		// 		frameRate: {
+		// 			ideal: twentyfive[3],
+		// 			max: twentyfive[3]
+		// 		}
+		// 	},
+		// 	audio: true,
+		// }
+		// bitrate = twentyfive[2];
 		document.getElementById('videoBox').style.gridTemplateColumns = "repeat(auto-fill, minmax(20%, auto))";
 		changeConfig();
 	}
@@ -530,14 +543,19 @@ const createSDPOffer = async userId => {
 	janusStreams[userId].getTracks().forEach(track => {
 		janusStreamPeers[userId].addTrack(track, janusStreams[userId]);
 
-		// var cnt = 1;
-		// var previoutData = 0;
-        // getStats(janusStreamPeers[userId], result => {
-        //     if(result){
-        //         document.getElementById(`bitrate-${userId}`).innerText = result.audio.bytesSent*8 - previoutData;
-        //         document.getElementById(`resolutions-${userId}`).innerText = result.resolutions.send.width+"*"+result.resolutions.send.height;;				previoutData = result.audio.bytesSent*8;
-        //     }
-        // }, 1000);
+		var cnt = 0;
+		let downloadSpeed = 0;
+        getStats(janusStreamPeers[userId], result => {
+            if(result){
+				document.getElementById(`bitrate-${userId}`).innerText = Math.round((result.video.bytesSent+result.audio.bytesSent)/(cnt*5));
+				// console.log(`bytesSent : ${result.video.bytesSent + result.audio.bytesSent}`);
+				// document.getElementById(`bitrate-${userId}`).innerText = result.bandwidth.speed;
+				// document.getElementById(`resolutions-${userId}`).innerText = result.resolutions.send.width+"*"+result.resolutions.send.height;
+				document.getElementById(`resolutions-${userId}`).innerText = result.bandwidth.speed/5;
+				console.log(`cnt : ${cnt}`, result.bandwidth)
+            }
+			cnt++;
+        }, 5000);
 	});
 
 	janusStreamPeers[userId].createOffer().then(sdp => {
@@ -591,7 +609,7 @@ const createSDPAnswer = async data => {
 				session_id: session_id,
 				body: {
 				request: "start",
-				room: "35610863",
+				room: "76052757",
 				video: true,
 				audio: true,
 				},
@@ -686,7 +704,7 @@ janus.createVideoRoom = (ws) => {
 		transaction: trxid,
 		body : {
 			request: 'create',
-			room: "35610863",
+			room: "76052757",
 			publishers: 100,
 			audiolevel_event: true,
 			audio_level_average: 70,
@@ -830,7 +848,7 @@ janus.destroyRoom = (ws) => {
 		transaction: trxid,
 		body : {
 			request: 'destroy',
-			room: "35610863"
+			room: "76052757"
 		}
 	};
 
@@ -847,7 +865,7 @@ janus.editRoom = (ws, bit) => {
 		transaction: trxid,
 		body : {
 			request: 'edit',
-			room: "35610863",
+			room: "76052757",
 			new_bitrate: bit
 		}
 	};
@@ -869,37 +887,11 @@ for(i=0;i<userBtns.length;++i){
 
 videoBtn.addEventListener('click', () => {
 	if(!videoOnOff){
-		// navigator.mediaDevices.getUserMedia(mediaConstraint).then(stream => {
-		// 	let videoTrack = stream.getVideoTracks()[0];
-		// 	var sender = janusStreamPeers[userId].getSenders().find(s => {
-		// 		return s.track.kind == videoTrack.kind;
-		// 	});
-		// 	sender.replaceTrack(videoTrack);
-		// 	janusStreams[userId] = stream;
-		// }).catch(err => {
-		// 	console.log('Error ::: ', err);
-		// });
-	}
-
-	else {
+		videoOnOff = true;
+		videoHandling(videoOnOff);
+	} else {
 		videoOnOff = false;
-		console.log("video off!", userId)
-		navigator.mediaDevices.getUserMedia({video: videoOnOff, audio: true}).then(stream => {
-			const sender = janusStreamPeers[userId].getSenders();
-			sender.forEach(sender => {
-				janusStreamPeers[userId].removeTrack(sender)
-			})
-
-			janusStreams[userId] = stream;
-
-			let str = 'multiVideo-'+userId;
-			let multiVideo = document.getElementById(str);
-			multiVideo.srcObject = janusStreams[userId];
-			multiVideo.muted = true
-
-		}).catch(err => {
-			console.log('Error ::: ', err);
-		});
+		videoHandling(videoOnOff);
 	}
 
 
