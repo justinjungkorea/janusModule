@@ -18,11 +18,11 @@ app.set('view engine', 'html');
 
 app.use(express.static('public'));
 
-app.get('/', (req,res)=>{
-    
+app.get('/home', (req,res)=>{
+    res.sendFile(__dirname +'/public/views/home.html')
 })
 
 http.createServer(app).listen(PORT, ()=>{
   // https.createServer(options, app).listen(PORT, ()=>{
-    console.log(`✅ Server running on http://localhost:${PORT}/views/home.html`);
+    console.log(`✅ Server running on http://localhost:${PORT}/home`);
 })
