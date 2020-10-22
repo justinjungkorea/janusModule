@@ -7,11 +7,9 @@ const subscribeFlag = document.getElementById('subscribeFlag');
 const videoBtn = document.getElementById('videoBtn');
 const audioBtn = document.getElementById('audioBtn');
 const blurBtn = document.getElementById('blurBtn');
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
 
 // var janusUrl = 'ws://106.240.247.43:8188';
-var janusUrl = 'ws://106.240.247.43:9500';
+let janusUrl = 'ws://106.240.247.43:9500';
 // var janusUrl = 'ws://15.165.32.44:7011';
 // var janusUrl = 'ws://15.165.44.98:7011';
 // var janusUrl = 'ws://13.209.65.193:8188';
@@ -30,7 +28,7 @@ let feedId;
 let userId;
 let people = {};
 
-let two = [240, 135, 1382000, 15];
+let two = [1280, 720, 1382000, 30];
 let four = [960, 540, 518000, 15];
 let nine = [640, 360, 230000, 15];
 let sixteen = [480, 270, 129000, 15];
@@ -91,7 +89,8 @@ const socketLog = (type, contents) => {
 	let textLine = document.createElement("p");
 	let textContents = document.createTextNode(`[${type}] ${contentsJson}`);
 	textLine.appendChild(textContents);
-	printBox.appendChild(textLine);
+	printBox.prepend(textLine)
+	// printBox.appendChild(textLine);
 }
 
 //transaction 값을 랜덤으로 생성
@@ -209,18 +208,18 @@ const getMessage = (message) => {
 					minusOne(tempId);
 				}
 				const audioStr = 'audio-level-dBov-av'
-				if(messageObj.plugindata.data && messageObj.plugindata.data.videoroom == 'talking'){
-					console.log("talking!!!!", messageObj.plugindata.data)
-					if(document.getElementById(feedIdToId[messageObj.plugindata.data.id])){
-						document.getElementById(feedIdToId[messageObj.plugindata.data.id]).style.border = "thick solid red";
-					}
-				} else if(messageObj.plugindata.data && messageObj.plugindata.data.videoroom == 'stopped-talking'){
-					console.log("stop talking!!!!", messageObj.plugindata.data);
-					if(document.getElementById(feedIdToId[messageObj.plugindata.data.id])){
-						document.getElementById(feedIdToId[messageObj.plugindata.data.id]).style.border = "thick solid black";
-					}
-
-				}
+				// if(messageObj.plugindata.data && messageObj.plugindata.data.videoroom == 'talking'){
+				// 	console.log("talking!!!!", messageObj.plugindata.data)
+				// 	if(document.getElementById(feedIdToId[messageObj.plugindata.data.id])){
+				// 		document.getElementById(feedIdToId[messageObj.plugindata.data.id]).style.border = "thick solid red";
+				// 	}
+				// } else if(messageObj.plugindata.data && messageObj.plugindata.data.videoroom == 'stopped-talking'){
+				// 	console.log("stop talking!!!!", messageObj.plugindata.data);
+				// 	if(document.getElementById(feedIdToId[messageObj.plugindata.data.id])){
+				// 		document.getElementById(feedIdToId[messageObj.plugindata.data.id]).style.border = "thick solid black";
+				// 	}
+				//
+				// }
 
 			}
 			break;
@@ -547,13 +546,18 @@ const createSDPOffer = async userId => {
 		let downloadSpeed = 0;
         getStats(janusStreamPeers[userId], result => {
             if(result){
-				document.getElementById(`bitrate-${userId}`).innerText = Math.round((result.video.bytesSent+result.audio.bytesSent)/(cnt*5));
+            	// console.log(`bytesSent : ${result.video.bytesSent+result.audio.bytesSent} / ${cnt} / ${(result.video.bytesSent+result.audio.bytesSent)/cnt}`)
+				document.getElementById(`resolutions-${userId}`).innerText = "Target - " + result.bandwidth.googTargetEncBitrate;
 				// console.log(`bytesSent : ${result.video.bytesSent + result.audio.bytesSent}`);
 				// document.getElementById(`bitrate-${userId}`).innerText = result.bandwidth.speed;
 				// document.getElementById(`resolutions-${userId}`).innerText = result.resolutions.send.width+"*"+result.resolutions.send.height;
-				document.getElementById(`resolutions-${userId}`).innerText = result.bandwidth.speed/5;
-				console.log(`cnt : ${cnt}`, result.bandwidth)
-            }
+				if(result.bandwidth.googTargetEncBitrate*0.8 > result.bandwidth.googActualEncBitrate){
+					document.getElementById(`bitrate-${userId}`).innerText = 'Warning';
+				} else {
+					document.getElementById(`bitrate-${userId}`).innerText = "Current - " + result.bandwidth.googActualEncBitrate
+				}
+				console.log(result.bandwidth);
+			}
 			cnt++;
         }, 5000);
 	});
@@ -706,7 +710,7 @@ janus.createVideoRoom = (ws) => {
 			request: 'create',
 			room: "76052757",
 			publishers: 100,
-			audiolevel_event: true,
+			audiolevel_event: false,
 			audio_level_average: 70,
 			record: false,
 			rec_dir: '/opt/justin/share/janus/recordings/'
